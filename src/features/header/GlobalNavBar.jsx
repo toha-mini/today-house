@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import cart from "../../imgs/kart.png";
 import logo from "../../imgs/logo.jpeg";
 import styled from "styled-components";
-import PostModal from "../../elements/PostModal";
+import PostModal from "./PostModal";
 
 const GlobalNavBar = () => {
 	console.log("GlobalNavBar is rendering!!!");

@@ -7,14 +7,46 @@ const LocalNavBar = () => {
 			<div>
 				<div>
 					<nav>
-						<span>{"홈"}</span>
-						<span>{"추천"}</span>
-						<span>{"집들이"}</span>
-						<span>{"살림수납"}</span>
-						<span>{"홈스토랑"}</span>
-						<span>{"취미일상"}</span>
-						<span>{"3D인테리어"}</span>
-						<span>{"이벤트"}</span>
+						<div>
+							<div>
+								<span>{"홈"}</span>
+							</div>
+						</div>
+						<div>
+							<div>
+								<span>{"추천"}</span>
+							</div>
+						</div>
+						<div>
+							<div>
+								<span>{"집들이"}</span>
+							</div>
+						</div>
+						<div>
+							<div>
+								<span>{"살림수납"}</span>
+							</div>
+						</div>
+						<div>
+							<div>
+								<span>{"홈스토랑"}</span>
+							</div>
+						</div>
+						<div>
+							<div>
+								<span>{"취미일상"}</span>
+							</div>
+						</div>
+						<div>
+							<div>
+								<span>{"3D인테리어"}</span>
+							</div>
+						</div>
+						<div>
+							<div>
+								<span>{"이벤트"}</span>
+							</div>
+						</div>
 					</nav>
 				</div>
 				<div></div>
@@ -25,4 +57,6 @@ const LocalNavBar = () => {
 
 export default LocalNavBar;
 
-const StLocalNavBar = styled.div``;
+const StLocalNavBar = styled.div`
+	margin-top: 80px;
+`;

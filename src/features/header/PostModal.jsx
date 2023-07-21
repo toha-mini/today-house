@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { css } from "styled-components";
 import { IoIosArrowDown } from "react-icons/io";
-import modal1 from "../imgs/modal1.png";
-import modal2 from "../imgs/modal2.png";
-import modal3 from "../imgs/modal3.png";
-import modal4 from "../imgs/modal4.png";
-import modal5 from "../imgs/modal5.png";
+import modal1 from "../../imgs/modal1.png";
+import modal2 from "../../imgs/modal2.png";
+import modal3 from "../../imgs/modal3.png";
+import modal4 from "../../imgs/modal4.png";
+import modal5 from "../../imgs/modal5.png";
 import { useNavigate } from "react-router-dom";
 
 const PostModal = () => {
