@@ -17,15 +17,14 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
         <BrowserRouter>
-          <GlobalStyle>
-            <Routes>
-              <Route path="/" element={<Main />} />
-              <Route path="/account" element={<Account />} />
-              <Route path="/login" element={<LogIn />} />
-              <Route path="/homepicture" element={<HomePicture />} />
-              <Route path="/homepicturepost" element={<HomePicturePost />} />
-            </Routes>
-          </GlobalStyle>
+          <GlobalStyle />
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/homepicture" element={<HomePicture />} />
+            <Route path="/homepicturepost" element={<HomePicturePost />} />
+          </Routes>
         </BrowserRouter>
       </Provider>
     </QueryClientProvider>
