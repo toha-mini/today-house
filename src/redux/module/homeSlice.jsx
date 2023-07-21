@@ -1,7 +1,7 @@
 import React from "react";
 
-const Account = () => {
+const homeSlice = () => {
 	return <div></div>;
 };
 
-export default Account;
+export default homeSlice;
