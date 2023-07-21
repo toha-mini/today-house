@@ -10,7 +10,7 @@ import GlobalStyle from "./GlobalStyled";
 import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "react-query";
 import store from "./redux/config/configStore";
-import Layout from "./components/Layout";
+import Header from "./components/Header";
 const queryClient = new QueryClient();
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
 			<Provider store={store}>
 				<BrowserRouter>
 					<GlobalStyle />
+					{/* <Header /> */}
 					<Routes>
 						<Route path='/' element={<Main />} />
 						<Route path='/account' element={<Account />} />
