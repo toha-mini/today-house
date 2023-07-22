@@ -15,13 +15,11 @@ const Layout = ({ children }) => {
 export default memo(Layout);
 
 const StLayout = styled.div`
+	position: relative;
+	top: 111px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin: auto;
-	height: calc(100vh - 45px);
-	/* background-color: ${({ bgColor }) => {
-		return bgColor;
-	}}; */
-	padding: 24px;
+	width: 100%;
 `;

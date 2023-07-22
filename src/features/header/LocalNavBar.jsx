@@ -42,6 +42,7 @@ const NavBarWrapper = styled.div`
 	top: 81px;
 	width: 100%;
 	justify-content: space-between;
+	border-bottom: 1px solid rgb(234, 237, 239);
 `;
 
 const NavBarInner = styled.div`
