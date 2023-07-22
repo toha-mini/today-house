@@ -1,12 +1,9 @@
 import React from "react";
-import Navbar from "../components/homepicturepost/Navbar";
+
+import GlobalNavBar from "../features/header/GlobalNavBar";
 
 const HomePicturePost = () => {
-  return (
-    <div>
-      <Navbar />
-    </div>
-  );
+  return <GlobalNavBar />;
 };
 
 export default HomePicturePost;

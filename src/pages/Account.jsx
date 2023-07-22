@@ -5,6 +5,7 @@ import facebook from "../images/facebook.png";
 import kakaotalk from "../images/kakaotalk.png";
 import naver from "../images/naver.png";
 import recaptcha from "../images/recaptcha.png";
+import AgreementCheckBox from "../components/AgreementCheckBox";
 
 const Account = () => {
   return (
@@ -13,10 +14,12 @@ const Account = () => {
       <LogoContainerTitle>
         <img src={todaylogo} alt="logo" />
       </LogoContainerTitle>
+      {""}
       {/* 회원가입 전체 요소들 묶어주기 */}
       <AccountElementsContainer>
         {/* 회원가입 */}
         <AccountTitle>회원가입</AccountTitle>
+        {""}
         <SnsAccountButtonContainer>
           <SnsAccountContent>SNS계정으로 간편하게 회원가입</SnsAccountContent>
           <SnsButtons>
@@ -75,57 +78,7 @@ const Account = () => {
           <InputBox type="text" placeholder="별명(2~15자)" />
           <EmailCheckContents>사용 중인 별명입니다.</EmailCheckContents>
           {/* 약관동의 */}
-          <LabelName>약관동의</LabelName>
-          <AgreeContainer>
-            <AreeTitleContainer>
-              <CheckInput type="checkbox" />
-              <AgreeContents>
-                전체동의
-                <SubContents>선택항목에 대한 동의 포함</SubContents>
-              </AgreeContents>
-            </AreeTitleContainer>
-
-            <div>
-              <AgreeItemsContainer>
-                <CheckInput type="checkbox" />
-                <PlusContents>
-                  만 14세 이상입니다
-                  <Essential>(필수)</Essential>
-                </PlusContents>
-              </AgreeItemsContainer>
-              <AgreeItemsContainer>
-                <CheckInput type="checkbox" />
-                <PlusContents>
-                  이용약관
-                  <Essential>(필수)</Essential>
-                  <span>버튼</span>
-                </PlusContents>
-              </AgreeItemsContainer>
-              <AgreeItemsContainer>
-                <CheckInput type="checkbox" />
-                <PlusContents>
-                  개인정보수집 및 이용동의
-                  <Essential>(필수)</Essential>
-                  <span>버튼</span>
-                </PlusContents>
-              </AgreeItemsContainer>
-              <AgreeItemsContainer>
-                <CheckInput type="checkbox" />
-                <PlusContents>
-                  개인정보 마케팅 활용 동의
-                  <Select>(선택)</Select>
-                  <span>버튼</span>
-                </PlusContents>
-              </AgreeItemsContainer>
-              <AgreeItemsContainer>
-                <CheckInput type="checkbox" />
-                <PlusContents>
-                  이벤트, 쿠폰, 특가 알림 메일 및 SMS 등 수신
-                  <Select>(선택)</Select>
-                </PlusContents>
-              </AgreeItemsContainer>
-            </div>
-          </AgreeContainer>
+          <AgreementCheckBox />
           {/* 로봇이 아닙니다 */}
           <RobotCheckContainer>
             <RobotLabel>
@@ -171,6 +124,11 @@ const AccountElementsContainer = styled.div`
   padding: 60px 0px;
   margin: auto;
 `;
+const AccountTitle = styled.h1`
+  font-size: 20px;
+  font-weight: bold;
+`;
+
 const SnsAccountButtonContainer = styled.div`
   margin: 30px 0px;
   padding-bottom: 30px;
@@ -185,25 +143,6 @@ const SnsButtons = styled.div`
 const SnsButton = styled.div`
   margin-left: 10px;
 `;
-
-const AccountTitle = styled.h1`
-  font-size: 20px;
-  font-weight: bold;
-`;
-
-const SnsAccountContent = styled.div`
-  font-size: 12px;
-  text-align: center;
-  margin: 15px 0px;
-  color: #757575;
-`;
-
-const ButtonImg = styled.img`
-  width: 48px;
-  height: 48px;
-  border-radius: 100%;
-`;
-
 const LabelName = styled.label`
   display: block;
   margin-top: 10px;
@@ -214,7 +153,6 @@ const LabelName = styled.label`
   color: #2f3438;
   letter-spacing: -0.3px;
 `;
-
 const EmailInput = styled.input`
   width: 170px;
   height: 40px;
@@ -225,13 +163,11 @@ const EmailInput = styled.input`
     border: 2px solid #c3e7fa;
   }
 `;
-
 const AtSign = styled.span`
   color: #dbdbdb;
   line-height: 40px;
   font-size: 15px;
 `;
-
 const EmailSelect = styled.select`
   width: 170px;
   height: 40px;
@@ -247,7 +183,6 @@ const EmailOption = styled.option`
   color: #424242;
   padding: 5px;
 `;
-
 const EmailCheckContents = styled.div`
   color: rgb(255, 119, 119);
   padding-top: 10px;
@@ -270,6 +205,19 @@ const EmailCheckButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+const SnsAccountContent = styled.div`
+  font-size: 12px;
+  text-align: center;
+  margin: 15px 0px;
+  color: #757575;
+`;
+
+const ButtonImg = styled.img`
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
 `;
 
 const InputBox = styled.input`
@@ -296,60 +244,6 @@ const CheckContents = styled.div`
   letter-spacing: -0.3px;
 `;
 
-const AgreeContainer = styled.div`
-  border: 1px solid #eaedef;
-  padding: 18px;
-  margin-bottom: 30px;
-  width: 360px;
-`;
-
-const AreeTitleContainer = styled.div`
-  border-bottom: 1px solid #d3d3d3;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-`;
-const AgreeItemsContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-const CheckInput = styled.input`
-  width: 18px;
-  height: 18px;
-  &:checked {
-    background-color: #35c5f0;
-  }
-`;
-
-const AgreeContents = styled.span`
-  color: #2f3438;
-  line-height: 20px;
-  font-size: 14px;
-  font-weight: 700;
-`;
-
-const SubContents = styled.span`
-  color: rgb(194, 200, 204);
-  font-size: 11px;
-  font-weight: 400;
-`;
-const PlusContents = styled.span`
-  color: #424242;
-  line-height: 20px;
-  font-size: 13px;
-  line-height: 35px;
-`;
-const Select = styled.span`
-  color: #828c94;
-  line-height: 20px;
-  font-size: 11px;
-`;
-const Essential = styled.span`
-  color: #009fce;
-  line-height: 20px;
-  font-size: 11px;
-`;
 const RobotCheckContainer = styled.div`
   border: 1px solid #d3d3d3;
   width: 360px;
@@ -381,16 +275,14 @@ const AccountButton = styled.button`
   }
 `;
 
-const FooterContainer = styled.div`
-  /* border: 1px solid green; */
-  display: flex;
-  margin-top: 30px;
-  justify-content: center;
-`;
-
 const LogInLink = styled.div`
   cursor: pointer;
 
   font-weight: 700;
+`;
+const FooterContainer = styled.div`
+  display: flex;
+  margin-top: 30px;
+  justify-content: center;
 `;
 export default Account;
