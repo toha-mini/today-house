@@ -4,6 +4,7 @@ import Layout from "../components/Layout";
 import MainBanner from "../features/HomePage/MainBanner";
 import HomeMenu from "../features/HomePage/HomeMenuBar";
 import { styled } from "styled-components";
+import Housewarming from "../features/HomePage/Housewarming";
 
 const Main = () => {
 	return (
@@ -11,6 +12,7 @@ const Main = () => {
 			<StPage>
 				<MainBanner />
 				<HomeMenu />
+				<Housewarming />
 			</StPage>
 		</Layout>
 	);

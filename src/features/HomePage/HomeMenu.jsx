@@ -13,6 +13,7 @@ const HomeMenu = ({ src, name }) => {
 export default HomeMenu;
 
 const HomeIconWrap = styled.div`
+	cursor: pointer;
 	display: flex;
 	justify-content: space-around;
 	flex-wrap: wrap;
@@ -25,8 +26,6 @@ const IconName = styled.div`
 	font-size: 16px;
 	line-height: 20px;
 `;
-
-
 
 const IconImage = styled.img`
 	max-width: 88px;

@@ -31,7 +31,9 @@ const GlobalNavBar = () => {
 						<StGlobalInputNav>
 							<GlobalInput type='text' />
 						</StGlobalInputNav>
-						<GlobalNavCart src={cart} />
+						<GlobalNavCartWrap>
+							<GlobalNavCart src={cart} />
+						</GlobalNavCartWrap>
 						<StGlobalNavContainer>
 							<GlobalNavTag>
 								<GlobalNav2 $noBorder>{"로그인"}</GlobalNav2>
@@ -76,6 +78,7 @@ const ContainerInner = styled.div`
 `;
 
 const StLogo = styled.div`
+	cursor: pointer;
 	position: static;
 `;
 
@@ -86,6 +89,7 @@ const Logo = styled.img`
 `;
 
 const StGlobalNav1 = styled.div`
+	cursor: pointer;
 	display: flex;
 	margin-right: 50px;
 `;
@@ -109,6 +113,7 @@ const GlobalNav1 = styled.div`
 `;
 
 const StGlobalNav2 = styled.div`
+	cursor: pointer;
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-start;
@@ -117,6 +122,7 @@ const StGlobalNav2 = styled.div`
 
 const StGlobalInputNav = styled.div`
 	align-items: center;
+	margin-left: 80px;
 `;
 
 const GlobalInput = styled.input`
@@ -143,7 +149,6 @@ const StGlobalNavContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin-bottom: 10px;
 	margin-right: 20px;
 `;
 
@@ -155,4 +160,11 @@ const GlobalNavTag = styled.div`
 const GlobalNav2 = styled.div`
 	padding: 0 10px;
 	border-left: ${(props) => (props.$noBorder ? "none" : "1px solid #c1cad0")};
+`;
+
+const GlobalNavCartWrap = styled.div`
+	align-items: center;
+	justify-content: center;
+	padding: 6px;
+	margin-right: 5px;
 `;

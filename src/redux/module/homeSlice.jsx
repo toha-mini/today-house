@@ -1,7 +1,13 @@
-// import React from "react";
+import { createSlice } from "@reduxjs/toolkit";
 
-// const homeSlice = () => {
-// 	return <div></div>;
-// };
+export const selectedSlice = createSlice({
+	name: "selected",
+	initialState: null,
+	reducers: {
+		select: (state, action) => action.payload,
+	},
+});
 
-// export default homeSlice;
+export const { select } = selectedSlice.actions;
+
+export default selectedSlice.reducer;
