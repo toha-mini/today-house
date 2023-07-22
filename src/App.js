@@ -10,9 +10,7 @@ import GlobalStyle from "./GlobalStyled";
 import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "react-query";
 import store from "./redux/config/configStore";
-
 import { Card } from "./pages/Card";
-
 const queryClient = new QueryClient();
 
 function App() {
