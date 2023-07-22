@@ -1,15 +1,20 @@
 import React from "react";
+import GlobalNavBar from "../features/header/GlobalNavBar";
+import LocalNavBar from "../features/header/LocalNavBar";
+import { styled } from "styled-components";
 
 const Header = () => {
 	return (
-		<div>
-			<div>
-				<nav>
-					<div>titlasdasde</div>
-				</nav>
-			</div>
-		</div>
+		<StHeader>
+			<GlobalNavBar />
+			<LocalNavBar />
+		</StHeader>
 	);
 };
 
 export default Header;
+
+const StHeader = styled.div`
+	display: flex;
+	flex-direction: column;
+`;

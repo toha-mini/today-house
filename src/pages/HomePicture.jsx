@@ -1,7 +1,8 @@
 import React from "react";
+import Layout from "../components/Layout";
 
 const HomePicture = () => {
-  return <div></div>;
+	return <Layout></Layout>;
 };
 
 export default HomePicture;

@@ -1,20 +1,24 @@
-import React from "react";
+import React, { memo } from "react";
 import Header from "./Header";
 import styled from "styled-components";
 
 const Layout = ({ children }) => {
+	console.log("Layout is rendering");
 	return (
-		<div>
+		<>
 			<Header />
-			asdasdasd
 			<StLayout>{children}</StLayout>
-		</div>
+		</>
 	);
 };
 
-export default Layout;
+export default memo(Layout);
 
 const StLayout = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
 	height: calc(100vh - 45px);
 	/* background-color: ${({ bgColor }) => {
 		return bgColor;
