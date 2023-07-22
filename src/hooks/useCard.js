@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { useSelector, useDispatch } from "react-redux";
 import { add_card, delete_card, selectCards } from "../redux/module/CardSlice";
 
@@ -13,6 +14,7 @@ export const useCard = () => {
   const onChangeTitleHandle = (e) => {
     setTitleImage(e.target.value);
   };
+
   const onChangeContentHandle = (e) => {
     setContent(e.target.value);
   };
@@ -41,5 +43,6 @@ export const useCard = () => {
     deleteCard,
     onChangeContentHandle,
     onChangeTitleHandle,
+
   };
 };

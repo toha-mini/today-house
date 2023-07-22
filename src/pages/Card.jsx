@@ -5,9 +5,11 @@ import { PiHeartThin } from 'react-icons/pi';
 import { PiBookmarkSimpleThin } from 'react-icons/pi';
 import { PiChatCircleThin } from 'react-icons/pi';
 
+
 export const Card = (id) => {
   return (
     <CardMain  key={id} >
+
       <CardBody>
         <CardButton>
       <CardNav style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
