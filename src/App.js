@@ -10,6 +10,7 @@ import GlobalStyle from "./GlobalStyled";
 import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "react-query";
 import store from "./redux/config/configStore";
+import { Card } from "./pages/Card";
 const queryClient = new QueryClient();
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/account" element={<Account />} />
             <Route path="/login" element={<LogIn />} />
+            <Route path="/card" element={<Card />} />
             <Route path="/homepicture" element={<HomePicture />} />
             <Route path="/homepicturepost" element={<HomePicturePost />} />
           </Routes>
@@ -29,6 +31,7 @@ function App() {
       </Provider>
     </QueryClientProvider>
   );
+
 }
 
 export default App;

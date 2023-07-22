@@ -10,9 +10,12 @@ box-sizing: border-box;
 }
 
 body {
-color: rgb (29, 29, 31);
-background-color: white;
-margin: 0;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: -.4p;
+    letter-spacing: -.4px;
+    color: rgb (29, 29, 31);
+    background-color: white;
+    margin: 0;
 
 }
 

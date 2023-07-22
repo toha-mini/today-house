@@ -1,7 +1,7 @@
-import React from "react";
+// import React from "react";
 
-const homeSlice = () => {
-	return <div></div>;
-};
+// const homeSlice = () => {
+// 	return <div></div>;
+// };
 
-export default homeSlice;
+// export default homeSlice;
