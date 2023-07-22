@@ -7,6 +7,7 @@ import modal3 from "../../imgs/modal3.png";
 import modal4 from "../../imgs/modal4.png";
 import modal5 from "../../imgs/modal5.png";
 import { useNavigate } from "react-router-dom";
+import PostModalItem from "./PostModalItem";
 
 const PostModal = () => {
 	console.log("Modal is rendering!!!");
@@ -47,41 +48,32 @@ const PostModal = () => {
 			</GlobalNavButton>
 			{modalOpen ? (
 				<OpenPostModal ref={refModal}>
-					<PostModalContainer onClick={onPostPictureHandler}>
-						<PostModalImg src={modal1} />
-						<PostModalContents>
-							<PostModalTitle>{"사진동영상 올리기"}</PostModalTitle>
-							<PostModalText>{"우리 집의 공간과 나의 일상을 기록해 보세요."}</PostModalText>
-						</PostModalContents>
-					</PostModalContainer>
-					<PostModalContainer>
-						<PostModalImg src={modal2} />
-						<PostModalContents>
-							<PostModalTitle>{"집들이 글쓰기"}</PostModalTitle>
-							<PostModalText>{"집에 관한 이야기를 글로 작성해 보세요."}</PostModalText>
-						</PostModalContents>
-					</PostModalContainer>
-					<PostModalContainer>
-						<PostModalImg src={modal3} />
-						<PostModalContents>
-							<PostModalTitle>{"노하우 글쓰기"}</PostModalTitle>
-							<PostModalText>{"다양한 인테리어 노하우를 공유해 주세요."}</PostModalText>
-						</PostModalContents>
-					</PostModalContainer>
-					<PostModalContainer>
-						<PostModalImg src={modal4} />
-						<PostModalContents>
-							<PostModalTitle>{"상품 리뷰 쓰기"}</PostModalTitle>
-							<PostModalText>{"상품 리뷰를 작성하고 포인트도 받아 보세요."}</PostModalText>
-						</PostModalContents>
-					</PostModalContainer>
-					<PostModalContainer>
-						<PostModalImg src={modal5} />
-						<PostModalContents>
-							<PostModalTitle>{"시공 전문가 리뷰쓰기"}</PostModalTitle>
-							<PostModalText>{"시공 전문가 리뷰를 작성하고 포인트도 받아 보세요."}</PostModalText>
-						</PostModalContents>
-					</PostModalContainer>
+					<PostModalItem
+						onClickHandler={onPostPictureHandler}
+						imgSrc={modal1}
+						title={"사진동영상 올리기"}
+						text={"우리 집의 공간과 나의 일상을 기록해 보세요."}
+					/>
+					<PostModalItem
+						imgSrc={modal2}
+						title={"집들이 글쓰기"}
+						text={"집에 관한 이야기를 글로 작성해 보세요."}
+					/>
+					<PostModalItem
+						imgSrc={modal3}
+						title={"노하우 글쓰기"}
+						text={"다양한 인테리어 노하우를 공유해 주세요."}
+					/>
+					<PostModalItem
+						imgSrc={modal4}
+						title={"상품 리뷰 쓰기"}
+						text={"상품 리뷰를 작성하고 포인트도 받아 보세요."}
+					/>
+					<PostModalItem
+						imgSrc={modal5}
+						title={"시공 전문가 리뷰쓰기"}
+						text={"시공 전문가 리뷰를 작성하고 포인트도 받아 보세요."}
+					/>
 				</OpenPostModal>
 			) : null}
 		</>
@@ -117,6 +109,7 @@ const GlobalNavButtonArrow = styled.div`
 `;
 
 const OpenPostModal = styled.div`
+	z-index: 1100;
 	position: absolute;
 	top: 50px;
 	left: 65px;
