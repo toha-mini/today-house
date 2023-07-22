@@ -1,18 +1,17 @@
 import React from "react";
 import { styled } from "styled-components";
-import housewarming1 from "../../imgs/housewarming1.jpeg";
-import housewarming2 from "../../imgs/housewarming2.jpeg";
-import housewarming3 from "../../imgs/housewarming3.jpeg";
-import housewarming4 from "../../imgs/housewarming4.jpeg";
-import HousewarmingCard from "./HousewarmingCard";
 
-const Housewarming = () => {
+import HousewarmingCard from "./HousewarmingCard";
+import { useSelector } from "react-redux";
+import { Cards_1 } from "../../redux/module/homeSlice_1";
+
+const Housewarming = ({ title, card }) => {
 	return (
 		<StHousewarming>
 			<HousewarmingCardTitle>
 				<HousewarmingCardTitleWrap>
 					<HousewarmingCardContainer>
-						<HousewarmingTitle>{"🥇 20평 대! 공간 활용 best 4 🥇"}</HousewarmingTitle>
+						<HousewarmingTitle>{title}</HousewarmingTitle>
 					</HousewarmingCardContainer>
 				</HousewarmingCardTitleWrap>
 				<HousewarmingButtonWrap>
@@ -21,7 +20,9 @@ const Housewarming = () => {
 			</HousewarmingCardTitle>
 			<HousewarmingCardImageWrap>
 				<HousewarmingCardImageContainer>
-					<HousewarmingCard />
+					{card.map((item, index) => (
+						<HousewarmingCard key={index} src={item.src} title={item.title} text={item.text} />
+					))}
 				</HousewarmingCardImageContainer>
 			</HousewarmingCardImageWrap>
 		</StHousewarming>
