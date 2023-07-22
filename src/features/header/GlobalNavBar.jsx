@@ -4,21 +4,10 @@ import logo from "../../imgs/logo.jpeg";
 import styled from "styled-components";
 import PostModal from "./PostModal";
 import UploadButton from "./UploadButton";
-import { useLocation } from "react-router";
 
 const GlobalNavBar = () => {
   console.log("GlobalNavBar is rendering!!!");
   const [selected, setSelected] = useState(null);
-  const [isMainPage, setIsMainPage] = useState(true);
-  console.log(isMainPage);
-  const location = useLocation();
-
-  useEffect(() => {
-    if (location.pathname === "/homepicturepost") {
-      setIsMainPage(false);
-    }
-  }, [location]);
-  //location실행이 될때 페이지가 이동될때마다 useeffect실행
 
   return (
     <StGlobalNavBar>
@@ -27,47 +16,42 @@ const GlobalNavBar = () => {
           <StLogo>
             <Logo src={logo} />
           </StLogo>
-          {isMainPage && (
-            <>
-              <StGlobalNav1>
-                <GlobalNav1
-                  selected={selected === "커뮤니티"}
-                  onClick={() => setSelected("커뮤니티")}
-                >
-                  {"커뮤니티"}
-                </GlobalNav1>
-                <GlobalNav1
-                  selected={selected === "쇼핑"}
-                  onClick={() => setSelected("쇼핑")}
-                >
-                  {"쇼핑"}
-                </GlobalNav1>
-                <GlobalNav1
-                  selected={selected === "이사/시공/생활"}
-                  onClick={() => setSelected("이사/시공/생활")}
-                >
-                  {"이사/시공/생활"}
-                </GlobalNav1>
-              </StGlobalNav1>
-              <StGlobalNav2>
-                <StGlobalInputNav>
-                  <GlobalInput type="text" />
-                </StGlobalInputNav>
-                <GlobalNavCart src={cart} />
-                <StGlobalNavContainer>
-                  <GlobalNavTag>
-                    <GlobalNav2 $noBorder>{"로그인"}</GlobalNav2>
-                    <GlobalNav2>{"회원가입"}</GlobalNav2>
-                    <GlobalNav2>{"고객센터"}</GlobalNav2>
-                  </GlobalNavTag>
-                  <PostModal />
-                </StGlobalNavContainer>
-              </StGlobalNav2>
-            </>
-          )}
-
-          {/* 버튼컴포넌트만든거를 조건부렌더링하기 (글쓰기 메인페이지에 대한 조건)넣어서*/}
-          <UploadButton />
+          <>
+            <StGlobalNav1>
+              <GlobalNav1
+                selected={selected === "커뮤니티"}
+                onClick={() => setSelected("커뮤니티")}
+              >
+                {"커뮤니티"}
+              </GlobalNav1>
+              <GlobalNav1
+                selected={selected === "쇼핑"}
+                onClick={() => setSelected("쇼핑")}
+              >
+                {"쇼핑"}
+              </GlobalNav1>
+              <GlobalNav1
+                selected={selected === "이사/시공/생활"}
+                onClick={() => setSelected("이사/시공/생활")}
+              >
+                {"이사/시공/생활"}
+              </GlobalNav1>
+            </StGlobalNav1>
+            <StGlobalNav2>
+              <StGlobalInputNav>
+                <GlobalInput type="text" />
+              </StGlobalInputNav>
+              <GlobalNavCart src={cart} />
+              <StGlobalNavContainer>
+                <GlobalNavTag>
+                  <GlobalNav2 $noBorder>{"로그인"}</GlobalNav2>
+                  <GlobalNav2>{"회원가입"}</GlobalNav2>
+                  <GlobalNav2>{"고객센터"}</GlobalNav2>
+                </GlobalNavTag>
+                <PostModal />
+              </StGlobalNavContainer>
+            </StGlobalNav2>
+          </>
         </ContainerInner>
       </GlobalNavBarContainer>
     </StGlobalNavBar>

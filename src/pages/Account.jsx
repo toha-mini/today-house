@@ -159,8 +159,10 @@ const EmailInput = styled.input`
   border-radius: 4px;
   border: 1px solid #dbdbdb;
   padding-left: 10px;
-  &:hover {
-    border: 2px solid #c3e7fa;
+  &:focus {
+    outline: none !important;
+    border-color: #c8ffff;
+    /* box-shadow: 0 0 10px #c8ffff; */
   }
 `;
 const AtSign = styled.span`

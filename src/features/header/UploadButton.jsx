@@ -15,7 +15,7 @@ const GlobalNavButton = styled.button`
   font-size: 14px;
   line-height: 18px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: auto;
   height: 40px;
