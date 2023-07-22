@@ -1,7 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { selectedSlice } from "../module/selectSlice";
+import cardSlice from "../module/CardSlice";
 // import homeSlice from "../module/homeSlice";
 
-const store = configureStore({ reducer: { selected: selectedSlice } });
+const store = configureStore({
+  reducer: {
+    cardSlice,
+  },
+});
 
 export default store;

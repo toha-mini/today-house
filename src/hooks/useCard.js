@@ -1,62 +1,48 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getTodos, addTodo } from "../api/todos";
-import { delete_todo, update_todo } from "../redux/modules/todoSlice";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+
+import { useSelector, useDispatch } from "react-redux";
+import { add_card, delete_card, selectCards } from "../redux/module/CardSlice";
 
 export const useCard = () => {
-  // 리액트 쿼리 관련 코드\
-
-  const { isLoading, isError, data } = useQuery("todos", getTodos);
-
-  const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [titleImage, setTitleImage] = useState("");
+
+  const card = useSelector(selectCards);
   const dispatch = useDispatch();
-
-  const mutateAddTodo = useMutation(addTodo, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("todos");
-      console.log("성공");
-    },
-  });
-
-  const pulsTodo = () => {
-    const newTodo = {
-      title: title,
-      content: content,
-    };
-    mutateAddTodo.mutate(newTodo);
-  };
+  console.log(card);
 
   const onChangeTitleHandle = (e) => {
-    setTitle(e.target.value);
+    setTitleImage(e.target.value);
   };
 
   const onChangeContentHandle = (e) => {
     setContent(e.target.value);
   };
 
-  const deleteTodo = (id) => {
-    dispatch(delete_todo(id));
+  const addCard = () => {
+    const newCard = {
+      id: Date.now(),
+      content: content,
+      titleImage: titleImage,
+    };
+    dispatch(add_card(newCard));
+    setTitleImage("");
+    setContent("");
   };
 
-  const makeDone = (id) => {
-    dispatch(update_todo(id));
+  const deleteCard = (id) => {
+    dispatch(delete_card(id));
   };
-
-  const queryClient = useQueryClient();
 
   return {
-    title,
+    card,
     content,
-    setTitle,
+    setTitleImage,
     setContent,
-    addTodo,
-    deleteTodo,
-    makeDone,
+    addCard,
+    deleteCard,
     onChangeContentHandle,
     onChangeTitleHandle,
-    data,
-    pulsTodo,
+
   };
 };
