@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
-import postlogo from "../images/postlogo.png";
-import camera from "../images/camera.png";
+import postlogo from "../imgs/postlogo.png";
+import camera from "../imgs/camera.png";
 import { BiSolidDownArrow } from "react-icons/bi";
 import SpaceInofoModal from "../components/homepicturepost/SpaceInofoModal";
 
