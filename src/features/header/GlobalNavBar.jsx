@@ -3,7 +3,6 @@ import cart from "../../imgs/kart.png";
 import logo from "../../imgs/logo.jpeg";
 import styled from "styled-components";
 import PostModal from "./PostModal";
-import UploadButton from "./UploadButton";
 
 const GlobalNavBar = () => {
   console.log("GlobalNavBar is rendering!!!");
