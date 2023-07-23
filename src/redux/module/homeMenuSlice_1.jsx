@@ -25,9 +25,7 @@ const initialState = [
 const menu_1 = createSlice({
 	name: "selectSlice_1",
 	initialState,
-	reducers: {
-		select: (state, action) => action.payload,
-	},
+	reducers: {},
 });
 
 export default menu_1.reducer;
