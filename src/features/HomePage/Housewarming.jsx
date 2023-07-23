@@ -1,9 +1,6 @@
 import React from "react";
 import { styled } from "styled-components";
-
 import HousewarmingCard from "./HousewarmingCard";
-import { useSelector } from "react-redux";
-import { Cards_1 } from "../../redux/module/homeSlice_1";
 
 const Housewarming = ({ title, card }) => {
 	return (
