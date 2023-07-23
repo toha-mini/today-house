@@ -1,16 +1,13 @@
 import React from "react";
 import { styled } from "styled-components";
 import HousewarmingCard from "./HousewarmingCard";
+import HousewarmingTitle from "./HousewarmingTitle";
 
-const Housewarming = ({ title, card }) => {
+const Housewarming = ({ title, card, size }) => {
 	return (
 		<StHousewarming>
 			<HousewarmingCardTitle>
-				<HousewarmingCardTitleWrap>
-					<HousewarmingCardContainer>
-						<HousewarmingTitle>{title}</HousewarmingTitle>
-					</HousewarmingCardContainer>
-				</HousewarmingCardTitleWrap>
+				<HousewarmingTitle title={title} />
 				<HousewarmingButtonWrap>
 					<HousewarmingMore>{"더보기"}</HousewarmingMore>
 				</HousewarmingButtonWrap>
@@ -18,7 +15,7 @@ const Housewarming = ({ title, card }) => {
 			<HousewarmingCardImageWrap>
 				<HousewarmingCardImageContainer>
 					{card.map((item, index) => (
-						<HousewarmingCard key={index} src={item.src} title={item.title} text={item.text} />
+						<HousewarmingCard key={index} src={item.src} title={item.title} text={item.text} size={size} />
 					))}
 				</HousewarmingCardImageContainer>
 			</HousewarmingCardImageWrap>
@@ -41,32 +38,6 @@ const HousewarmingCardTitle = styled.div`
 	width: 100%;
 	padding: 20px 0;
 	line-height: 1;
-`;
-
-const HousewarmingCardTitleWrap = styled.div`
-	flex: 1 1 0%;
-	display: flex;
-	align-items: flex-start;
-	flex-direction: column;
-	min-width: 0px;
-`;
-
-const HousewarmingCardContainer = styled.div`
-	display: inline-flex;
-	align-items: center;
-	min-width: 100%;
-	cursor: pointer;
-`;
-
-const HousewarmingTitle = styled.strong`
-	overflow: hidden;
-	display: inline-flex;
-	font-weight: 700;
-	letter-spacing: -0.3px;
-	white-space: nowrap;
-	text-overflow: ellipsis;
-	font-size: 20px;
-	line-height: 28px;
 `;
 
 const HousewarmingButtonWrap = styled.div`
@@ -95,58 +66,4 @@ const HousewarmingCardImageContainer = styled.div`
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
 	gap: 20px;
-`;
-
-const HousewarmingCardItem = styled.div`
-	position: relative;
-	display: flex;
-	width: 100%;
-	min-width: 0px;
-	flex-flow: column;
-`;
-
-const HousewarmingCardImageInner = styled.div`
-	overflow: hidden;
-	position: relative;
-	border-radius: 4px;
-`;
-
-const HousewarmingCardImage = styled.img`
-	width: 100%;
-	height: 179px;
-	/* object-fit: cover; */
-	/* position: absolute;
-	top: 0px;
-	left: 0px; */
-	/* transition: transform 0.2s ease 0s; */
-`;
-
-const HousewarmingCardName = styled.div`
-	min-width: 0px;
-	font-size: 16px;
-	line-height: 24px;
-	color: rgb(47, 52, 56);
-	word-break: keep-all;
-	overflow-wrap: break-word;
-`;
-
-const HousewarmingCardNameWrap = styled.p`
-	overflow: hidden;
-	font-size: 16px;
-	line-height: 24px;
-	font-weight: 400;
-	color: rgb(47, 52, 56);
-	word-break: keep-all;
-	overflow-wrap: break-word;
-`;
-
-const HousewarmingCardNameItem = styled.span`
-	color: rgb(53, 197, 240);
-	font-weight: 700;
-	min-width: 0px;
-	font-size: 16px;
-	line-height: 24px;
-
-	word-break: keep-all;
-	overflow-wrap: break-word;
 `;

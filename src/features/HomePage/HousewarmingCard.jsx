@@ -1,15 +1,15 @@
 import React from "react";
-import { styled } from "styled-components";
+import { css, styled } from "styled-components";
 
-const HousewarmingCard = ({ src, title, text }) => {
+const HousewarmingCard = ({ src, title, text, size }) => {
 	return (
 		<HousewarmingCardItem>
 			<HousewarmingCardImageInner>
-				<HousewarmingCardImage src={src} />
+				<HousewarmingCardImage src={src} size={size} />
 			</HousewarmingCardImageInner>
 			<HousewarmingCardName>
 				<HousewarmingCardNameWrap>
-					<HousewarmingCardNameItem>{title} </HousewarmingCardNameItem>
+					<HousewarmingCardNameItem>{title}</HousewarmingCardNameItem>
 					{text}
 				</HousewarmingCardNameWrap>
 			</HousewarmingCardName>
@@ -36,11 +36,27 @@ const HousewarmingCardImageInner = styled.div`
 const HousewarmingCardImage = styled.img`
 	width: 100%;
 	height: 179px;
-	/* object-fit: cover; */
-	/* position: absolute;
-	top: 0px;
-	left: 0px; */
-	/* transition: transform 0.2s ease 0s; */
+	border-radius: 4px;
+
+	${({ size }) => {
+		switch (size) {
+			case "housewarming":
+				return css`
+					height: 179px;
+				`;
+			case "shopping":
+				return css`
+					height: 269px;
+				`;
+			case "interior":
+				return css`
+					height: 243px;
+					width: 365px;
+				`;
+			default:
+				return css``;
+		}
+	}}
 `;
 
 const HousewarmingCardName = styled.div`
