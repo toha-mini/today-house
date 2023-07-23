@@ -1,11 +1,11 @@
 import React from "react";
 import { styled } from "styled-components";
-import todaylogo from "../images/todaylogo.png";
-import facebook from "../images/facebook.png";
-import kakaotalk from "../images/kakaotalk.png";
-import naver from "../images/naver.png";
-import recaptcha from "../images/recaptcha.png";
-import AgreementCheckBox from "../components/account/AgreementCheckBox";
+import todaylogo from "../imgs/todaylogo.png";
+import facebook from "../imgs/facebook.png";
+import kakaotalk from "../imgs/kakaotalk.png";
+import naver from "../imgs/naver.png";
+import recaptcha from "../imgs/recaptcha.png";
+import AgreementCheckBox from "../features/account/AgreementCheckBox";
 
 const Account = () => {
   return (
