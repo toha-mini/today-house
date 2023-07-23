@@ -5,7 +5,7 @@ import facebook from "../images/facebook.png";
 import kakaotalk from "../images/kakaotalk.png";
 import naver from "../images/naver.png";
 import recaptcha from "../images/recaptcha.png";
-import AgreementCheckBox from "../components/AgreementCheckBox";
+import AgreementCheckBox from "../components/account/AgreementCheckBox";
 
 const Account = () => {
   return (
