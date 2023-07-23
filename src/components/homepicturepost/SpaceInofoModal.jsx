@@ -1,7 +1,7 @@
 import React from "react";
 import { styled } from "styled-components";
 
-const SpaceInofoModal = () => {
+const SpaceInofoModal = ({ setIsOpen, isOpen }) => {
   return (
     <ModalContainer>
       <ModalItem>원룸</ModalItem>
@@ -32,6 +32,6 @@ const ModalItem = styled.div`
   font-size: 16px;
   padding: 16px;
   line-height: 20px;
-  /* overflow: hidden; */
+  overflow: auto;
 `;
 export default SpaceInofoModal;

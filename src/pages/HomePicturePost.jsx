@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import postlogo from "../images/postlogo.png";
 import camera from "../images/camera.png";
+import { BiSolidDownArrow } from "react-icons/bi";
 import SpaceInofoModal from "../components/homepicturepost/SpaceInofoModal";
 
 const HomePicturePost = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const OnclickModalOpen = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <div>
       <NavbarContainer>
@@ -31,11 +37,18 @@ const HomePicturePost = () => {
           <Contents>
             <ContentInput
               type="text"
-              placeholder="어떤 사진인지 짧은 소개로 시작해보세요."
+              // placeholder="어떤 사진인지 짧은 소개로 시작해보세요.
+              // &#13;&#10; 다양한 #태그도 추가할 수 있어요."
+              placeholder="줄바꿈은 다음과 같은 캐릭터셋을 지정합니다. &#13;&#10; 줄바꿈이 되었습니다."
             />
           </Contents>
-          <SpaceInfo>공간정보추가</SpaceInfo>
-          <SpaceInofoModal />
+          <div>
+            <SpaceInfo onClick={OnclickModalOpen}>
+              공간정보추가
+              <BiSolidDownArrow />
+            </SpaceInfo>
+          </div>
+          {isOpen && <SpaceInofoModal setIsOpen={setIsOpen} isOpen={isOpen} />}
         </ContentsUploadContainer>
       </MainContainer>
     </div>
@@ -103,6 +116,7 @@ const MainContainer = styled.div`
   height: 480px;
   margin: auto;
   margin-top: 40px;
+
   display: flex;
 `;
 
@@ -170,15 +184,19 @@ const Contents = styled.div`
   /* border: 2px solid pink; */
   width: 437px;
   height: 152px;
+  /* overflow-wrap: break-word;
+  white-space: pre-line; */
 `;
-const ContentInput = styled.input`
+const ContentInput = styled.textarea`
   width: 437px;
   height: 152px;
   border: 1px solid #dbdbdb;
   border-radius: 4px;
+  resize: none;
 `;
 
 const SpaceInfo = styled.div`
+  cursor: pointer;
   border: 2px solid gray;
   width: 437px;
   height: 40px;
