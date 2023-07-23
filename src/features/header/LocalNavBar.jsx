@@ -33,15 +33,18 @@ export default LocalNavBar;
 const NavBarWrapperContainer = styled.div`
 	height: 51px;
 	width: 1798px;
+	background-color: #fff;
 `;
 
 const NavBarWrapper = styled.div`
 	position: fixed;
 	z-index: 1000;
 	transition: top 0.1s ease 0s;
-	top: 81px;
+	top: 80px;
 	width: 100%;
 	justify-content: space-between;
+	background-color: #fff;
+	border-bottom: 1px solid rgb(234, 237, 239);
 `;
 
 const NavBarInner = styled.div`
@@ -50,7 +53,7 @@ const NavBarInner = styled.div`
 	justify-content: space-between;
 	max-width: 1256px;
 	margin: 0 auto;
-	padding: 0 90px;
+	padding: 0 50px;
 `;
 
 const NavItemsWrapper = styled.div``;
