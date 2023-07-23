@@ -3,13 +3,13 @@ import Header from "./Header";
 import styled from "styled-components";
 
 const Layout = ({ children }) => {
-	console.log("Layout is rendering");
-	return (
-		<>
-			<Header />
-			<StLayout>{children}</StLayout>
-		</>
-	);
+  console.log("Layout is rendering");
+  return (
+    <>
+      <Header />
+      <StLayout>{children}</StLayout>
+    </>
+  );
 };
 
 export default memo(Layout);
