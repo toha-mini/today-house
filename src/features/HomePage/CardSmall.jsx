@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import profile from "../../imgs/default_profile.png";
 
 const CardSmall = ({ card, title, subtitle, more, src }) => {
 	return (
@@ -9,13 +10,13 @@ const CardSmall = ({ card, title, subtitle, more, src }) => {
 					<CardSmallItem key={index}>
 						<CardInnerWrap>
 							<CardInnerImageWrap>
-								<CardInnerImageItem src={item.src} />
+								<CardInnerImageItem src={item.titleImage} />
 								<CardProfileWrap>
 									<CardProfileContainer>
 										<CardProfileInner>
-											<CardProfileItem />
+											<CardProfileItem src={profile} />
 										</CardProfileInner>
-										<CardProfileUserName>{item.username}</CardProfileUserName>
+										<CardProfileUserName>{item.nickname}</CardProfileUserName>
 									</CardProfileContainer>
 								</CardProfileWrap>
 								<div>
