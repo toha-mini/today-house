@@ -10,13 +10,15 @@ import GlobalStyle from "./GlobalStyled";
 import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "react-query";
 import store from "./redux/config/configStore";
-
 import { CardLayout } from "./pages/CardLayout";
+
 import { Detail } from "./pages/Detail";
+
 
 const queryClient = new QueryClient();
 
 function App() {
+
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
@@ -35,6 +37,7 @@ function App() {
       </Provider>
     </QueryClientProvider>
   );
+
 }
 
 export default App;

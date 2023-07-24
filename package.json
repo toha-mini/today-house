@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@egjs/react-infinitegrid": "^4.10.0",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.14.1",
@@ -15,9 +16,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.8.0",
     "react-dom": "^18.2.0",
-
     "react-icon": "^1.0.0",
-
     "react-icons": "^4.10.1",
     "react-query": "^3.39.3",
     "react-redux": "^8.1.1",
