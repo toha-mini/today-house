@@ -4,10 +4,12 @@ const instance = axios.create({
 	baseURL: process.env.REACT_APP_SERVER_URL,
 });
 
-//! Get
+// //! Get
 const getPhotoLists = async () => {
+	console.log(process.env.REACT_APP_SERVER_URL);
 	try {
-		const response = await instance.get(`api/posts/like`);
+		const response = await instance.get(`/api/posts`);
+		console.log("response: ", response);
 		return response.data;
 	} catch (error) {
 		throw new Error(error.message);

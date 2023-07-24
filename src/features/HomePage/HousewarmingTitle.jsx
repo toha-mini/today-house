@@ -23,12 +23,6 @@ const HousewarmingTitle = ({ title, subtitle, more }) => {
 
 export default HousewarmingTitle;
 
-const StCard = styled.div`
-	margin: 40px auto;
-	max-width: 1256px;
-	padding: 0px 60px;
-`;
-
 const CardTitleWrap = styled.div`
 	display: flex;
 	align-items: center;
