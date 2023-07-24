@@ -3,8 +3,9 @@ import styled from "styled-components";
 import camera from "../../imgs/camera.png";
 
 const ImageUpload = () => {
-  const [selectedImages, setSelectedImages] = useState([]);
-  const [showFileInput, setShowFileInput] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [selectedImages, setSelectedImages] = useState([null]);
+  console.log(selectedImages);
 
   const handleImageSelect = (index) => (event) => {
     const file = event.target.files[0];
@@ -14,8 +15,7 @@ const ImageUpload = () => {
       reader.onloadend = () => {
         const updatedImages = [...selectedImages];
         updatedImages[index] = reader.result;
-        setSelectedImages(updatedImages);
-        setShowFileInput(false);
+        setSelectedImages(updatedImages.concat(null));
       };
       reader.readAsDataURL(file);
     }
@@ -23,7 +23,6 @@ const ImageUpload = () => {
 
   const onClickplusImage = (index) => () => {
     // 이미지버튼 추가하기 했을 때
-    setShowFileInput(true);
     document.getElementById(`imageInput-${index}`).click();
   };
 
@@ -35,31 +34,24 @@ const ImageUpload = () => {
             <CameraLogo src={camera} alt="camera" />
             <FirstContent>사진을 끌어다 놓으세요</FirstContent>
             <SecondContent>10장까지 올릴 수 있어요.</SecondContent>
-
-            <Image src={imageSrc} alt="selected" />
-            {showFileInput && (
-              <input
-                id={`imageInput-${index}`}
-                type="file"
-                multiple="multiple"
-                accept="image/jpg, image/png, image/jpeg"
-                onChange={handleImageSelect(index)}
-                style={{ display: "none" }}
-              />
-            )}
-
+            {/*  */}
+            <input
+              id={`imageInput-${index}`}
+              type="file"
+              multiple="multiple"
+              accept="image/jpg, image/png, image/jpeg"
+              onChange={handleImageSelect(index)}
+              style={{ display: "none" }}
+            />
             {imageSrc === null && (
               <PcUploadButton onClick={onClickplusImage(index)}>
                 PC에서 불러오기
               </PcUploadButton>
             )}
+            {/*  */}
+            <Image src={imageSrc} alt="selected" />
           </StImageWrap>
         ))}
-        {selectedImages.length === 0 && (
-          <PcUploadButton onClick={onClickplusImage(selectedImages.length)}>
-            PC에서 불러오기
-          </PcUploadButton>
-        )}
       </Upload>
     </ImageUploadContainer>
   );
