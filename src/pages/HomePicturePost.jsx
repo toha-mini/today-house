@@ -12,7 +12,7 @@ const HomePicturePost = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <div>
+    <PageContainer>
       <NavbarContainer>
         <HeaderContainer>
           <Logo src={postlogo} alt="postlogo" />
@@ -41,9 +41,12 @@ const HomePicturePost = () => {
           {isOpen && <SpaceInofoModal setIsOpen={setIsOpen} isOpen={isOpen} />}
         </ContentsUploadContainer>
       </MainContainer>
-    </div>
+    </PageContainer>
   );
 };
+const PageContainer = styled.div`
+  height: 100%;
+`;
 
 const NavbarContainer = styled.div`
   border-bottom: 1px solid #dbdbdb;
@@ -101,7 +104,6 @@ const PictureButton = styled.div`
 `;
 
 const MainContainer = styled.div`
-  /* border: 1px solid green; */
   width: 943px;
   height: 480px;
   margin: auto;
@@ -111,7 +113,6 @@ const MainContainer = styled.div`
 `;
 
 const ContentsUploadContainer = styled.div`
-  /* border: 2px solid red; */
   width: 514px;
   height: 440px;
   margin-left: 10px;
