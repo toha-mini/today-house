@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 
 const CardTitle = ({ title, subtitle, more }) => {
 	return (
-		<CardTitleWrap>
+		<CardTitleWrap subtitle={subtitle}>
 			<CardTitleContainer>
 				<CardTitleInner>
 					<CardTitleItem>{title}</CardTitleItem>
@@ -28,7 +28,7 @@ const CardTitleWrap = styled.div`
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	padding: 20px 0;
+	padding: ${({ subtitle }) => (subtitle !== null ? "20px 0" : 0)};
 `;
 
 const CardTitleContainer = styled.div`

@@ -20,4 +20,5 @@ const Main = styled.div`
 	/* top: 111px; */
 	margin: auto;
 	width: 100%;
+	overflow: hidden;
 `;
