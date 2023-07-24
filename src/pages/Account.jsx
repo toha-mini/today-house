@@ -100,102 +100,107 @@ const Account = () => {
 };
 
 const AccountPageContainer = styled.div`
-  margin-top: 40px;
+	margin-top: 40px;
 
-  padding: 0px 0px 0px 15px;
+	padding: 0px 0px 0px 15px;
 `;
 const LogoContainerTitle = styled.div`
-  width: 88px;
-  height: 31px;
-  display: flex;
+	width: 88px;
+	height: 31px;
+	display: flex;
 `;
 
 const LogoTitle = styled.div``;
 
 const AccountElementsContainer = styled.div`
-  width: 360px;
-  height: 1400px;
-  padding: 60px 0px;
-  margin: auto;
+	width: 360px;
+	height: 1400px;
+	padding: 60px 0px;
+	margin: auto;
+`;
+
+const AccountTitle = styled.h1`
+	font-size: 20px;
+	font-weight: bold;
 `;
 
 const SnsAccountButtonContainer = styled.div`
-  margin: 30px 0px;
-  padding-bottom: 30px;
-  border: none;
+	margin: 30px 0px;
+	padding-bottom: 30px;
+	border: none;
 `;
 
 const SnsButtons = styled.div`
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 `;
 
 const SnsButton = styled.div`
-  margin-left: 10px;
+	margin-left: 10px;
 `;
 
 const SnsAccountContent = styled.div`
-  font-size: 12px;
-  text-align: center;
-  margin: 15px 0px;
-  color: #757575;
+	font-size: 12px;
+	text-align: center;
+	margin: 15px 0px;
+	color: #757575;
 `;
 
 const ButtonImg = styled.img`
-  width: 48px;
-  height: 48px;
-  border-radius: 100%;
+	width: 48px;
+	height: 48px;
+	border-radius: 100%;
 `;
 
 const LabelName = styled.label`
-  display: block;
-  margin-top: 10px;
-  margin-bottom: 12px;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 700;
-  color: #2f3438;
-  letter-spacing: -0.3px;
+	display: block;
+	margin-top: 10px;
+	margin-bottom: 12px;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 700;
+	color: #2f3438;
+	letter-spacing: -0.3px;
 `;
 
 const EmailInput = styled.input`
-  width: 170px;
-  height: 40px;
-  border-radius: 4px;
-  border: 1px solid #dbdbdb;
-  padding-left: 10px;
-  &:focus {
-    outline: none !important;
-    border-color: #c8ffff;
-    /* box-shadow: 0 0 10px #c8ffff; */
-  }
+	width: 170px;
+	height: 40px;
+	border-radius: 4px;
+	border: 1px solid #dbdbdb;
+	padding-left: 10px;
+	&:focus {
+		outline: none !important;
+		border-color: #c8ffff;
+		/* box-shadow: 0 0 10px #c8ffff; */
+	}
 `;
 const AtSign = styled.span`
-  color: #dbdbdb;
-  line-height: 40px;
-  font-size: 15px;
+	color: #dbdbdb;
+	line-height: 40px;
+	font-size: 15px;
 `;
 const EmailSelect = styled.select`
-  width: 170px;
-  height: 40px;
-  border-radius: 4px;
-  border: 1px solid #dbdbdb;
-  background-color: #fff;
-  padding: 0 15px;
-  line-height: 40px;
-  color: #424242;
+	width: 170px;
+	height: 40px;
+	border-radius: 4px;
+	border: 1px solid #dbdbdb;
+	background-color: #fff;
+	padding: 0 15px;
+	line-height: 40px;
+	color: #424242;
 `;
 const EmailOption = styled.option`
-  border: 1px solid #dbdbdb;
-  color: #424242;
-  padding: 5px;
+	border: 1px solid #dbdbdb;
+	color: #424242;
+	padding: 5px;
 `;
 const EmailCheckContents = styled.div`
-  color: rgb(255, 119, 119);
-  padding-top: 10px;
-  font-size: 14px;
-  line-height: 18px;
-  margin-bottom: 10px;
+	color: rgb(255, 119, 119);
+	padding-top: 10px;
+	font-size: 14px;
+	line-height: 18px;
+	margin-bottom: 10px;
 `;
 const EmailCheckButton = styled.div`
 	width: 360px;
@@ -215,40 +220,40 @@ const EmailCheckButton = styled.div`
 `;
 
 const InputBox = styled.input`
-  border: 1px solid #dbdbdb;
-  background-color: #fff;
-  line-height: 18px;
-  width: 100%;
-  width: 360px;
-  height: 40px;
-  border-radius: 4px;
-  color: rgb(0, 0, 0);
-  font-size: 14px;
-  padding-left: 10px;
-  &:hover {
-    border: 2px solid #c3e7fa;
-  }
+	border: 1px solid #dbdbdb;
+	background-color: #fff;
+	line-height: 18px;
+	width: 100%;
+	width: 360px;
+	height: 40px;
+	border-radius: 4px;
+	color: rgb(0, 0, 0);
+	font-size: 14px;
+	padding-left: 10px;
+	&:hover {
+		border: 2px solid #c3e7fa;
+	}
 `;
 
 const CheckContents = styled.div`
-  color: #828c94;
-  font-size: 14px;
-  line-height: 18px;
-  margin-bottom: 10px;
-  letter-spacing: -0.3px;
+	color: #828c94;
+	font-size: 14px;
+	line-height: 18px;
+	margin-bottom: 10px;
+	letter-spacing: -0.3px;
 `;
 
 const RobotCheckContainer = styled.div`
-  border: 1px solid #d3d3d3;
-  width: 360px;
-  display: flex;
+	border: 1px solid #d3d3d3;
+	width: 360px;
+	display: flex;
 `;
 const RobotLabel = styled.label`
-  display: flex;
+	display: flex;
 `;
 const ReImage = styled.img`
-  width: 50px;
-  height: 50px;
+	width: 50px;
+	height: 50px;
 `;
 const AccountButton = styled.button`
 	margin-top: 30px;
@@ -276,9 +281,9 @@ const FooterContainer = styled.div`
 `;
 
 const LogInLink = styled.div`
-  cursor: pointer;
+	cursor: pointer;
 
-  font-weight: 700;
+	font-weight: 700;
 `;
 
 export default Account;
