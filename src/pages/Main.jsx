@@ -6,6 +6,7 @@ import Housewarming from "../features/HomePage/Housewarming";
 import HousewarmingTitle from "../features/HomePage/HousewarmingTitle";
 import Card from "../features/HomePage/Card";
 import { styled } from "styled-components";
+
 import { useSelector } from "react-redux";
 import { Cards_1 } from "../redux/module/homeSlice_1";
 import { Cards_2 } from "../redux/module/homeSlice_2";
@@ -16,6 +17,7 @@ import { Menu_2 } from "../redux/module/homeMenuSlice_2";
 import { Shopping_1 } from "../redux/module/shoppingSlice_1";
 import { PhotoReview } from "../redux/module/photoSlice";
 import { Interior } from "../redux/module/interiorSlice";
+
 
 const Main = () => {
 	const menu_1 = useSelector(Menu_1);

@@ -12,26 +12,30 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import store from "./redux/config/configStore";
 import { CardLayout } from "./pages/CardLayout";
 
+import { Detail } from "./pages/Detail";
+
+
 const queryClient = new QueryClient();
 
 function App() {
-	return (
-		<QueryClientProvider client={queryClient}>
-			<Provider store={store}>
-				<BrowserRouter>
-					<GlobalStyle />
-					<Routes>
-						<Route path='/' element={<Main />} />
-						<Route path='/account' element={<Account />} />
-						<Route path='/login' element={<LogIn />} />
-						<Route path='/cardlayout' element={<CardLayout />} />
-						<Route path='/homepicture' element={<HomePicture />} />
-						<Route path='/homepicturepost' element={<HomePicturePost />} />
-					</Routes>
-				</BrowserRouter>
-			</Provider>
-		</QueryClientProvider>
-	);
+  return (
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <BrowserRouter>
+          <GlobalStyle />
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/account" element={<Account />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/cardlayout" element={<CardLayout />} />
+            <Route path="/detail" element={<Detail />} />
+            <Route path="/homepicture" element={<HomePicture />} />
+            <Route path="/homepicturepost" element={<HomePicturePost />} />
+          </Routes>
+        </BrowserRouter>
+      </Provider>
+    </QueryClientProvider>
+  );
 }
 
 export default App;
