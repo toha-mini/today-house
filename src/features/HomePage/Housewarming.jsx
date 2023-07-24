@@ -1,16 +1,14 @@
 import React from "react";
 import { styled } from "styled-components";
 import HousewarmingCard from "./HousewarmingCard";
-import HousewarmingTitle from "./HousewarmingTitle";
 
-const Housewarming = ({ title, card, size }) => {
+import CardTitle from "./CardTitle";
+
+const Housewarming = ({ title, card, size, subtitle, more }) => {
 	return (
 		<StHousewarming>
 			<HousewarmingCardTitle>
-				<HousewarmingTitle title={title} />
-				<HousewarmingButtonWrap>
-					<HousewarmingMore>{"더보기"}</HousewarmingMore>
-				</HousewarmingButtonWrap>
+				<CardTitle title={title} subtitle={subtitle} more={more} />
 			</HousewarmingCardTitle>
 			<HousewarmingCardImageWrap>
 				<HousewarmingCardImageContainer>

@@ -14,7 +14,7 @@ const Header = () => {
 
 export default Header;
 
-const StHeader = styled.div`
+const StHeader = styled.header`
 	display: flex;
-	flex-direction: column;
+	/* flex-direction: column; */
 `;

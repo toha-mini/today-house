@@ -31,8 +31,11 @@ const LocalNavBar = () => {
 export default LocalNavBar;
 
 const NavBarWrapperContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	margin-top: 20px;
 	height: 51px;
-	width: 1798px;
+	width: 1256px;
 	background-color: #fff;
 `;
 

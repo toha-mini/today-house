@@ -1,25 +1,24 @@
 import React, { memo } from "react";
 import Header from "./Header";
 import styled from "styled-components";
+import Footer from "./Footer";
 
 const Layout = ({ children }) => {
-  console.log("Layout is rendering");
-  return (
-    <>
-      <Header />
-      <StLayout>{children}</StLayout>
-    </>
-  );
+	console.log("Layout is rendering");
+	return (
+		<>
+			<Header />
+			<Main>{children}</Main>
+			<Footer />
+		</>
+	);
 };
 
 export default memo(Layout);
 
-const StLayout = styled.div`
-	position: relative;
-	top: 111px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+const Main = styled.div`
+	/* top: 111px; */
 	margin: auto;
 	width: 100%;
+	overflow: hidden;
 `;
