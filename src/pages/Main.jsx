@@ -4,7 +4,7 @@ import MainBanner from "../features/HomePage/MainBanner";
 import HomeMenuBar from "../features/HomePage/HomeMenuBar";
 import Housewarming from "../features/HomePage/Housewarming";
 import HousewarmingTitle from "../features/HomePage/HousewarmingTitle";
-import CardSmall from "../features/HomePage/CardSmall";
+import Card from "../features/HomePage/Card";
 import { styled } from "styled-components";
 import { useSelector } from "react-redux";
 import { Cards_1 } from "../redux/module/homeSlice_1";
@@ -58,7 +58,8 @@ const Main = () => {
 					<HomeMenuBar menu={menu_2} />
 				</StSecondMenu>
 				<Housewarming title={"오늘의딜"} card={shopping_1} size={"shopping"} />
-				<CardSmall
+				<Card
+					size={"small"}
 					card={photo}
 					title={"이런 사진 찾고 있나요?"}
 					subtitle={"좋아하실만한 인테리어 콘텐츠를 추천해드려요"}

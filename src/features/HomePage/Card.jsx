@@ -1,38 +1,25 @@
 import React from "react";
 import { styled } from "styled-components";
+import CardTitle from "./CardTitle";
+import CardSmall from "./CardSmall";
 
-const CardSmall = ({ card, title, subtitle, more, src }) => {
+const Card = ({ size, card, title, subtitle, more, src }) => {
 	return (
-		<>
-			{card &&
-				card.map((item, index) => (
-					<CardSmallItem key={index}>
-						<CardInnerWrap>
-							<CardInnerImageWrap>
-								<CardInnerImageItem src={item.src} />
-								<CardProfileWrap>
-									<CardProfileContainer>
-										<CardProfileInner>
-											<CardProfileItem />
-										</CardProfileInner>
-										<CardProfileUserName>{item.username}</CardProfileUserName>
-									</CardProfileContainer>
-								</CardProfileWrap>
-								<div>
-									<button>
-										<span></span>
-									</button>
-								</div>
-							</CardInnerImageWrap>
-							<CardInnerLink></CardInnerLink>
-						</CardInnerWrap>
-					</CardSmallItem>
-				))}
-		</>
+		<StCard>
+			{/* 카드타이틀 */}
+			<CardTitle title={title} subtitle={subtitle} more={more} />
+			<CardWrap>
+				<CardContainer>
+					<CardInner>
+						<CardSmallWrap>{size === "small" ? <CardSmall card={card} /> : null}</CardSmallWrap>
+					</CardInner>
+				</CardContainer>
+			</CardWrap>
+		</StCard>
 	);
 };
 
-export default CardSmall;
+export default Card;
 
 const StCard = styled.div`
 	margin: 40px auto;
