@@ -24,9 +24,7 @@ function App() {
 						<Route path='/' element={<Main />} />
 						<Route path='/account' element={<Account />} />
 						<Route path='/login' element={<LogIn />} />
-
 						<Route path='/cardlayout' element={<CardLayout />} />
-
 						<Route path='/homepicture' element={<HomePicture />} />
 						<Route path='/homepicturepost' element={<HomePicturePost />} />
 					</Routes>

@@ -1,5 +1,5 @@
 import React from "react";
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 const CardSmall = ({ card, title, subtitle, more, src }) => {
 	return (
@@ -34,34 +34,14 @@ const CardSmall = ({ card, title, subtitle, more, src }) => {
 
 export default CardSmall;
 
-const StCard = styled.div`
-	margin: 40px auto;
-	max-width: 1256px;
-	padding: 0px 60px;
-`;
-
-const CardWrap = styled.div``;
-
-const CardContainer = styled.div`
-	position: relative;
-`;
-
-const CardInner = styled.div`
-	position: relative;
-	z-index: 0;
-`;
-
-const CardSmallWrap = styled.ul`
-	display: flex;
-	overflow: hidden;
-`;
-
 const CardSmallItem = styled.li`
 	list-style: none;
 	margin: 0 20px 0 0;
 	flex-shrink: 0;
 	scroll-snap-align: start;
 	width: calc((100% - 100px) / 6);
+	/* transform: translateX(${(props) => props.$slidePx}px);
+	transition: 0.5s ease; */
 `;
 
 const CardInnerWrap = styled.div`

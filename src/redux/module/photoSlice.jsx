@@ -13,6 +13,8 @@ const initialState = [
 	{ src: photo4, username: "user_4" },
 	{ src: photo5, username: "user_5" },
 	{ src: photo6, username: "user_6" },
+	{ src: photo6, username: "user_6" },
+	{ src: photo6, username: "user_6" },
 ];
 
 const photoSlice = createSlice({

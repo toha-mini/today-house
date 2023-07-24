@@ -40,24 +40,6 @@ const Main = () => {
 			<StPage>
 				<MainBanner />
 				<HomeMenuBar menu={menu_1} />
-				{housewarming &&
-					housewarming.map((item, index) => {
-						if (item.card) {
-							return (
-								<div key={index}>
-									<Housewarming title={item.title} card={item.card} size={"housewarming"} />
-								</div>
-							);
-						}
-						return null;
-					})}
-				<StSecondMenu>
-					<MenuWrap>
-						<HousewarmingTitle title={"카테고리별 상품 찾기"} />
-					</MenuWrap>
-					<HomeMenuBar menu={menu_2} />
-				</StSecondMenu>
-				<Housewarming title={"오늘의딜"} card={shopping_1} size={"shopping"} />
 				<Card
 					size={"small"}
 					card={photo}
@@ -65,6 +47,31 @@ const Main = () => {
 					subtitle={"좋아하실만한 인테리어 콘텐츠를 추천해드려요"}
 					more={true}
 				/>
+				{housewarming &&
+					housewarming.map((item, index) => {
+						if (item.card) {
+							return (
+								<div key={index}>
+									<Housewarming
+										title={item.title}
+										card={item.card}
+										size={"housewarming"}
+										more={true}
+										subtitle={null}
+									/>
+								</div>
+							);
+						}
+						return null;
+					})}
+
+				<StSecondMenu>
+					<MenuWrap>
+						<HousewarmingTitle title={"카테고리별 상품 찾기"} />
+					</MenuWrap>
+					<HomeMenuBar menu={menu_2} />
+				</StSecondMenu>
+				<Housewarming title={"오늘의딜"} card={shopping_1} size={"shopping"} subtitle={null} />
 			</StPage>
 		</Layout>
 	);
