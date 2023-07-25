@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import profile from "../../imgs/default_profile.png";
+import BookMark from "./BookMark";
+import BookMarkOn from "./BookMarkOn";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getBookMarkLists, postBookMarkLists } from "../../api/oha";
 
-const CardSmall = ({ card, title, subtitle, more, src }) => {
+const CardSmall = ({ card = [], title, subtitle, more, src }) => {
+	const { data: bookmarkdata } = useQuery(["bookmark"], getBookMarkLists);
+	const queryClient = useQueryClient();
+	const mutation = useMutation(postBookMarkLists, {
+		onSuccess: (bookmarkdata) => {
+			queryClient.invalidateQueries(["bookmark"]);
+		},
+	});
+
+	const [onScrap, setOnScrap] = useState(Array(card.length).fill(false));
+
+	const bookMarkControlHandler = (index) => {
+		const newOnScrap = [...onScrap];
+		newOnScrap[index] = !newOnScrap[index];
+		setOnScrap(newOnScrap);
+
+		mutation.mutate({ id: card[index].postId });
+		console.log({ id: card[index].postId });
+	};
+
 	return (
 		<>
 			{card &&
@@ -19,11 +42,13 @@ const CardSmall = ({ card, title, subtitle, more, src }) => {
 										<CardProfileUserName>{item.nickname}</CardProfileUserName>
 									</CardProfileContainer>
 								</CardProfileWrap>
-								<div>
-									<button>
-										<span></span>
-									</button>
-								</div>
+								<ScrapButtonWrap>
+									<ScrapButtonContainer>
+										<span class='css-5dnyrm' onClick={() => bookMarkControlHandler(index)}>
+											{onScrap[index] ? <BookMark /> : <BookMarkOn />}
+										</span>
+									</ScrapButtonContainer>
+								</ScrapButtonWrap>
 							</CardInnerImageWrap>
 							<CardInnerLink></CardInnerLink>
 						</CardInnerWrap>
@@ -58,6 +83,7 @@ const CardInnerImageWrap = styled.div`
 	position: relative;
 	border-radius: 4px;
 	height: 230px;
+	justify-content: space-between;
 `;
 
 const CardInnerLink = styled.a`
@@ -127,3 +153,16 @@ const CardProfileUserName = styled.span`
 	white-space: nowrap;
 	text-overflow: ellipsis;
 `;
+
+const ScrapButtonWrap = styled.div`
+	position: absolute;
+	padding: 8px;
+	font-size: 0px;
+	z-index: 1;
+	right: 0px;
+	bottom: 0px;
+`;
+
+const ScrapButtonContainer = styled.div``;
+
+const ScrapButtonItem = styled.div``;
