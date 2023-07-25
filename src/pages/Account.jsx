@@ -4,101 +4,100 @@ import todaylogo from "../imgs/todaylogo.png";
 import facebook from "../imgs/facebook.png";
 import kakaotalk from "../imgs/kakaotalk.png";
 import naver from "../imgs/naver.png";
-import recaptcha from "../imgs/recaptcha.png";
 import AgreementCheckBox from "../features/account/AgreementCheckBox";
+import { useNavigate } from "react-router-dom";
 
 const Account = () => {
-	return (
-		<AccountPageContainer>
-			{/* 로고 */}
-			<LogoContainerTitle>
-				<img src={todaylogo} alt='logo' />
-			</LogoContainerTitle>
-			{""}
-			{/* 회원가입 전체 요소들 묶어주기 */}
-			<AccountElementsContainer>
-				{/* 회원가입 */}
-				<AccountTitle>회원가입</AccountTitle>
-				{""}
-				<SnsAccountButtonContainer>
-					<SnsAccountContent>SNS계정으로 간편하게 회원가입</SnsAccountContent>
-					<SnsButtons>
-						<SnsButton>
-							<ButtonImg src={facebook} alt='facebook' />
-						</SnsButton>
-						<SnsButton>
-							<ButtonImg src={kakaotalk} alt='kakaotalk' />
-						</SnsButton>
-						<SnsButton>
-							<ButtonImg src={naver} alt='naver' />
-						</SnsButton>
-					</SnsButtons>
-				</SnsAccountButtonContainer>
-				{/* 이메일  */}
-				<form>
-					<LabelName>이메일</LabelName>
-					<EmailInput text='text' placeholder='이메일' />
-					<AtSign>@</AtSign>
-					<EmailSelect>
-						<EmailOption>선택해주세요</EmailOption>
-						<EmailOption>naver.com</EmailOption>
-						<EmailOption>hanmail.com</EmailOption>
-						<EmailOption>daum.net</EmailOption>
-						<EmailOption>gmail.com</EmailOption>
-						<EmailOption>nate.com</EmailOption>
-						<EmailOption>hotmail.com</EmailOption>
-						<EmailOption>outlook.com</EmailOption>
-						<EmailOption>icloud.com</EmailOption>
-						<EmailOption>직접입력</EmailOption>
-					</EmailSelect>
-					{/* 이메일 안쓰면 들어가게하기 */}
-					<EmailCheckContents>필수입력항목입니다.</EmailCheckContents>
-					<div>
-						<EmailCheckButton>이메일 인증하기</EmailCheckButton>
-						<EmailCheckContents>중복된 이메일입니다.</EmailCheckContents>
-					</div>
-					{/* 비밀번호 */}
-					<LabelName>비밀번호</LabelName>
-					<CheckContents>영문,숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.</CheckContents>
-					<InputBox type='password' placeholder='비밀번호' />
-					<EmailCheckContents>필수입력항목입니다.</EmailCheckContents>
-					<LabelName>비밀번호 확인</LabelName>
-					<InputBox type='password' placeholder='비밀번호 확인' />
-					<EmailCheckContents>확인을 위해 비밀번호를 한 번 더 입력해주세요.</EmailCheckContents>
-					{/* 닉네임 */}
-					<LabelName>닉네임</LabelName>
-					<CheckContents>다른 유저와 겹치지 않도록 입력해주세요.(2~15자)</CheckContents>
+  const navigate = useNavigate();
+  const onClickSocial = () => {
+    alert("현재 준비중입니다!");
+  };
+  return (
+    <AccountPageContainer>
+      <LogoContainerTitle>
+        <LogoImage
+          src={todaylogo}
+          alt="logo"
+          onClick={() => {
+            navigate("/");
+          }}
+        />
+      </LogoContainerTitle>
+      <AccountElementsContainer>
+        <AccountTitle>회원가입</AccountTitle>
+        <SnsAccountButtonContainer>
+          <SnsAccountContent>SNS계정으로 간편하게 회원가입</SnsAccountContent>
+          <SnsButtons>
+            <SnsButton onClick={onClickSocial}>
+              <ButtonImg src={facebook} alt="facebook" />
+            </SnsButton>
+            <SnsButton onClick={onClickSocial}>
+              <ButtonImg src={kakaotalk} alt="kakaotalk" />
+            </SnsButton>
+            <SnsButton onClick={onClickSocial}>
+              <ButtonImg src={naver} alt="naver" />
+            </SnsButton>
+          </SnsButtons>
+        </SnsAccountButtonContainer>
+        <form>
+          <LabelName>이메일</LabelName>
+          <EmailInput text="text" placeholder="이메일" />
+          <AtSign>@</AtSign>
+          <EmailSelect>
+            <EmailOption>선택해주세요</EmailOption>
+            <EmailOption>naver.com</EmailOption>
+            <EmailOption>hanmail.com</EmailOption>
+            <EmailOption>daum.net</EmailOption>
+            <EmailOption>gmail.com</EmailOption>
+            <EmailOption>nate.com</EmailOption>
+            <EmailOption>hotmail.com</EmailOption>
+            <EmailOption>outlook.com</EmailOption>
+            <EmailOption>icloud.com</EmailOption>
+            <EmailOption>직접입력</EmailOption>
+          </EmailSelect>
+          <EmailCheckContents>필수입력항목입니다.</EmailCheckContents>
+          <div>
+            <EmailCheckButton>이메일 인증하기</EmailCheckButton>
+            <EmailCheckContents>중복된 이메일입니다.</EmailCheckContents>
+          </div>
+          <LabelName>비밀번호</LabelName>
+          <CheckContents>
+            영문,숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.
+          </CheckContents>
+          <InputBox type="password" placeholder="비밀번호" />
+          <EmailCheckContents>필수입력항목입니다.</EmailCheckContents>
+          <LabelName>비밀번호 확인</LabelName>
+          <InputBox type="password" placeholder="비밀번호 확인" />
+          <EmailCheckContents>
+            확인을 위해 비밀번호를 한 번 더 입력해주세요.
+          </EmailCheckContents>
 
-					<InputBox type='text' placeholder='별명(2~15자)' />
-					<EmailCheckContents>사용 중인 별명입니다.</EmailCheckContents>
-					{/* 약관동의 */}
-					<AgreementCheckBox />
-					{/* 로봇이 아닙니다 */}
-					<RobotCheckContainer>
-						<RobotLabel>
-							<input type='checkbox' />
-							<span>로봇이 아닙니다.</span>
-							<div>
-								<ReImage src={recaptcha} alt='recaptcha' />
-							</div>
-							<a>개인정보 보호 약관</a>
-						</RobotLabel>
-					</RobotCheckContainer>
-					{/* 회원가입하기버튼 */}
-					<div>
-						<AccountButton>회원가입하기</AccountButton>
-					</div>
-					{/* 로그인으로 */}
-					<FooterContainer>
-						<span>이미 아이디가 있으신가요?</span>
-						<LogInLink>로그인</LogInLink>
-					</FooterContainer>
-				</form>
-			</AccountElementsContainer>
-		</AccountPageContainer>
-	);
+          <LabelName>닉네임</LabelName>
+          <CheckContents>
+            다른 유저와 겹치지 않도록 입력해주세요.(2~15자)
+          </CheckContents>
+          <InputBox type="text" placeholder="별명(2~15자)" />
+          <EmailCheckContents>사용 중인 별명입니다.</EmailCheckContents>
+          <AgreementCheckBox />
+          <div>
+            <AccountButton>회원가입하기</AccountButton>
+          </div>
+          <FooterContainer>
+            <span>이미 아이디가 있으신가요?</span>
+            <LogInLink
+              onClick={() => {
+                navigate("/LogIn");
+              }}
+            >
+              로그인
+            </LogInLink>
+          </FooterContainer>
+        </form>
+      </AccountElementsContainer>
+    </AccountPageContainer>
+  );
 };
-
+const LogoImage = styled.div``;
 const AccountPageContainer = styled.div`
 	margin-top: 40px;
 
@@ -136,7 +135,8 @@ const SnsButtons = styled.div`
 `;
 
 const SnsButton = styled.div`
-	margin-left: 10px;
+  margin-left: 10px;
+  cursor: pointer;
 `;
 
 const SnsAccountContent = styled.div`

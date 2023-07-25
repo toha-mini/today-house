@@ -1,59 +1,52 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import postlogo from "../imgs/postlogo.png";
-import camera from "../imgs/camera.png";
 import { BiSolidDownArrow } from "react-icons/bi";
 import SpaceInofoModal from "../features/homepicturepost/SpaceInofoModal";
+import ImageUpload from "../features/homepicturepost/ImageUpload";
+
 
 const HomePicturePost = () => {
 	const [isOpen, setIsOpen] = useState(false);
-
-	const OnclickModalOpen = () => {
-		setIsOpen(!isOpen);
-	};
-	return (
-		<div>
-			<NavbarContainer>
-				<HeaderContainer>
-					<Logo src={postlogo} alt='postlogo' />
-					<UploadButton>올리기</UploadButton>
-				</HeaderContainer>
-			</NavbarContainer>
-			<SubHeaderContainer>
-				<PictureButton>사진</PictureButton>
-			</SubHeaderContainer>
-			<MainContainer>
-				<ImageUploadContainer>
-					<ImageUpload>
-						<CameraLogo src={camera} />
-						<FirstContent>사진을 끌어다 놓으세요</FirstContent>
-						<SecondContent>10장까지 올릴 수 있어요.</SecondContent>
-						<ButtonContainer>
-							<PcUploadButton>PC에서 불러오기</PcUploadButton>
-						</ButtonContainer>
-					</ImageUpload>
-				</ImageUploadContainer>
-				<ContentsUploadContainer>
-					<Contents>
-						<ContentInput
-							type='text'
-							// placeholder="어떤 사진인지 짧은 소개로 시작해보세요.
-							// &#13;&#10; 다양한 #태그도 추가할 수 있어요."
-							placeholder='줄바꿈은 다음과 같은 캐릭터셋을 지정합니다. &#13;&#10; 줄바꿈이 되었습니다.'
-						/>
-					</Contents>
-					<div>
-						<SpaceInfo onClick={OnclickModalOpen}>
-							공간정보추가
-							<BiSolidDownArrow />
-						</SpaceInfo>
-					</div>
-					{isOpen && <SpaceInofoModal setIsOpen={setIsOpen} isOpen={isOpen} />}
-				</ContentsUploadContainer>
-			</MainContainer>
-		</div>
-	);
+  const OnclickModalOpen = () => {
+    setIsOpen(!isOpen);
+  };
+  return (
+    <PageContainer>
+      <NavbarContainer>
+        <HeaderContainer>
+          <Logo src={postlogo} alt="postlogo" />
+          <UploadButton>올리기</UploadButton>
+        </HeaderContainer>
+      </NavbarContainer>
+      <SubHeaderContainer>
+        <PictureButton>사진</PictureButton>
+      </SubHeaderContainer>
+      <MainContainer>
+        {/* 컴포넌트 분리 */}
+        <ImageUpload />
+        <ContentsUploadContainer>
+          <Contents>
+            <ContentTextArea
+              type="text"
+              placeholder="어떤 사진인지 짧은 소개로 시작해보세요.&#13;&#10;다양한 #태그도 추가할 수 있어요."
+            />
+          </Contents>
+          <div>
+            <SpaceInfo onClick={OnclickModalOpen}>
+              공간정보추가
+              <BiSolidDownArrow style={{ marginLeft: "300px" }} />
+            </SpaceInfo>
+          </div>
+          {isOpen && <SpaceInofoModal setIsOpen={setIsOpen} isOpen={isOpen} />}
+        </ContentsUploadContainer>
+      </MainContainer>
+    </PageContainer>
+  );
 };
+const PageContainer = styled.div`
+  height: 100%;
+`;
 
 const NavbarContainer = styled.div`
 	border-bottom: 1px solid #dbdbdb;
@@ -111,88 +104,33 @@ const PictureButton = styled.div`
 `;
 
 const MainContainer = styled.div`
-	/* border: 1px solid green; */
-	width: 943px;
-	height: 480px;
-	margin: auto;
-	margin-top: 40px;
-
+  width: 943px;
+  height: 480px;
+  margin: auto;
+  margin-top: 40px;
 	display: flex;
 `;
 
-const ImageUploadContainer = styled.div`
-	background-color: rgb(247, 249, 250);
-	/* border: 2px solid blue; */
-	width: 428px;
-	height: 428px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-`;
-const ImageUpload = styled.div`
-	/* border: 1px solid red; */
-	text-align: center;
-`;
-const CameraLogo = styled.img`
-	/* border: 1px solid black; */
-	width: 35px;
-	height: 35px;
-`;
-const FirstContent = styled.div`
-	color: rgb(130, 140, 148);
-	font-size: 16px;
-	font-weight: 700;
-	line-height: 20px;
-`;
-
-const SecondContent = styled.div`
-	color: rgb(130, 140, 148);
-	font-size: 14px;
-	font-weight: 500;
-	line-height: 18px;
-	margin-top: 2px;
-`;
-const ButtonContainer = styled.div`
-	display: flex;
-	justify-content: center;
-	margin-top: 10px;
-`;
-const PcUploadButton = styled.div`
-	cursor: pointer;
-	width: 122px;
-	height: 40px;
-	font-size: 14px;
-	border: none;
-	background-color: rgb(53, 197, 240);
-	border-radius: 4px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: rgb(255, 255, 255);
-	font-weight: 400;
-	box-sizing: border-box;
-	line-height: 18px;
-`;
 const ContentsUploadContainer = styled.div`
-	/* border: 2px solid red; */
-	width: 514px;
-	height: 440px;
-	margin-left: 10px;
+  width: 514px;
+  height: 440px;
+  margin-left: 10px;
 `;
 
 const Contents = styled.div`
-	/* border: 2px solid pink; */
-	width: 437px;
-	height: 152px;
-	/* overflow-wrap: break-word;
-  white-space: pre-line; */
+  width: 437px;
+  height: 152px;
 `;
-const ContentInput = styled.textarea`
-	width: 437px;
-	height: 152px;
-	border: 1px solid #dbdbdb;
-	border-radius: 4px;
-	resize: none;
+const ContentTextArea = styled.textarea`
+  width: 437px;
+  height: 152px;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  resize: none;
+  padding: 16px;
+  font-size: 14px;
+  line-height: 20px;
+
 `;
 
 const SpaceInfo = styled.div`

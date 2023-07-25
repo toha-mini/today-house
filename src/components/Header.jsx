@@ -2,14 +2,12 @@ import React from "react";
 import GlobalNavBar from "../features/header/GlobalNavBar";
 import LocalNavBar from "../features/header/LocalNavBar";
 import { styled } from "styled-components";
-import test from "../features/header/test";
 
 const Header = () => {
 	return (
 		<StHeader>
 			<GlobalNavBar />
-			<test />
-			{/* <LocalNavBar /> */}
+			<LocalNavBar />
 		</StHeader>
 	);
 };
