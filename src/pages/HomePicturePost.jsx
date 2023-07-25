@@ -4,6 +4,10 @@ import postlogo from "../imgs/postlogo.png";
 import { BiSolidDownArrow } from "react-icons/bi";
 import SpaceInofoModal from "../features/homepicturepost/SpaceInofoModal";
 import ImageUpload from "../features/homepicturepost/ImageUpload";
+import axios from "axios";
+const instance = axios.create({
+  baseURL: "http://13.125.227.38:8080",
+});
 
 const HomePicturePost = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,12 +16,34 @@ const HomePicturePost = () => {
     setIsOpen(!isOpen);
   };
 
+  const onClickUpload = async (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    const request = { content: "content" };
+    console.log(request);
+    formData.append(
+      "request",
+      new Blob([JSON.stringify(request)], { type: "application/json" })
+    );
+    //json형태로 변환
+    formData.append("image", selectedImage);
+
+    try {
+      const res = await instance.post("/api/posts", formData, {
+        headers: {
+          "Content-Type": "multipart/formData",
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <PageContainer>
       <NavbarContainer>
         <HeaderContainer>
           <Logo src={postlogo} alt="postlogo" />
-          <UploadButton>올리기</UploadButton>
+          <UploadButton onClick={onClickUpload}>올리기</UploadButton>
         </HeaderContainer>
       </NavbarContainer>
       <SubHeaderContainer>
@@ -34,7 +60,11 @@ const HomePicturePost = () => {
             />
           </Contents>
           <div>
-            <SpaceInfo onClick={OnclickModalOpen}>
+            <SpaceInfo
+              onClick={OnclickModalOpen}
+              setIsOpen={setIsOpen}
+              isOpen={isOpen}
+            >
               공간정보추가
               <BiSolidDownArrow style={{ marginLeft: "300px" }} />
             </SpaceInfo>
