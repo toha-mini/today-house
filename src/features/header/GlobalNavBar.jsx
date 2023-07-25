@@ -52,6 +52,7 @@ const GlobalNavBar = () => {
 export default GlobalNavBar;
 
 const StGlobalNavBar = styled.div`
+
 	z-index: 1102;
 	position: fixed;
 	display: flex;
@@ -62,7 +63,7 @@ const StGlobalNavBar = styled.div`
 	height: 80px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-	border-bottom: 1px solid #eaedef;
+
 `;
 
 const GlobalNavBarContainer = styled.div`
