@@ -1,8 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 import Card from 'react-bootstrap/Card';
+import axios from "axios";
 
 const LogIn = () => {
+
+  const instanceAxios = axios.create({
+    baseURL : process.env.REACT_APP_SERVER_URL
+    // baseURL : "http://13.209.96.200:8080"
+  })
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const initTextFiled = () =>{
+    setEmail("");
+    setPassword("");
+  }
+
+
+  const LoginState = async (event) => { 
+    event.preventDefault();
+    console.log(process.env.REACT_APP_SERVER_URL)
+    try {
+      const payload = {
+        email:email,
+        password:password
+      }
+      console.log(payload);
+      let res = await instanceAxios.post(`/api/auth/login`, payload)
+      console.log(res);
+      if(res.data.status >= 300){
+        alert(res.data.message)
+        return;
+      }
+
+      initTextFiled();
+      console.log(res)
+      document.cookie = `accessToken=${res.headers.auth}; path=/;`
+      } 
+
+      catch (error) {
+        console.log(error)
+      }
+  }
+
+ const inputEmailHandler = (event) => {
+      setEmail(event.target.value);
+    }
+const inputPasswordHandler = (event) => {
+      setPassword(event.target.value);
+    }
+ 
   return (
     <LoginMain>
     <LoginLayout>
@@ -16,11 +65,30 @@ const LogIn = () => {
       />
       </h2>
 
-      <form style={{width: '300px'}}>
-        <LoginInput type="text" placeholder="이메일"/>
-        <LoginInput type="text" placeholder="비밀번호"/>
+      <form style={{width: '300px'}} onSubmit={LoginState}>
 
-         <LoginBtn>로그인</LoginBtn>
+{/* 로그인 인풋 */}
+        <LoginInput 
+                name='id'
+                autoFocus
+                autoComplete="current-id"
+                label="아이디"
+                required
+                value={email}
+                onChange={inputEmailHandler}
+                />
+        <LoginInput 
+                margin="normal"
+                name='password'
+                autoComplete="current-password"
+                label="패스워드"
+                type='Password'
+                value={password}
+                onChange={inputPasswordHandler}/>
+
+         <LoginBtn  
+                style={{ backgroundColor: "#3F9EF2" }}
+                variant="contained">로그인</LoginBtn>
          
         <section style={{display: 'block', textAlign: 'center'}}>
           <LoginText>비밀번호 재설정</LoginText>
@@ -174,7 +242,7 @@ const LoginSns = styled.p`
     line-height: 1.33;
 `
 
-const LoginUnuserText = styled.path`
+const LoginUnuserText = styled.div`
     width: 100%;
     margin: 40px 0px 20px;
     padding-top: 20px;
