@@ -5,12 +5,13 @@ import { BiSolidDownArrow } from "react-icons/bi";
 import SpaceInofoModal from "../features/homepicturepost/SpaceInofoModal";
 import ImageUpload from "../features/homepicturepost/ImageUpload";
 
-
 const HomePicturePost = () => {
-	const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
   const OnclickModalOpen = () => {
     setIsOpen(!isOpen);
   };
+
   return (
     <PageContainer>
       <NavbarContainer>
@@ -49,58 +50,59 @@ const PageContainer = styled.div`
 `;
 
 const NavbarContainer = styled.div`
-	border-bottom: 1px solid #dbdbdb;
-	width: 100%;
-	height: 80px;
+  border-bottom: 1px solid #dbdbdb;
+  width: 100%;
+  height: 80px;
 `;
 const HeaderContainer = styled.div`
-	width: 1256px;
-	height: 79px;
-	margin: auto;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+  width: 1256px;
+  height: 79px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 const Logo = styled.img`
-	width: 74px;
-	height: 32px;
+  cursor: pointer;
+  width: 74px;
+  height: 32px;
 `;
 const UploadButton = styled.div`
-	cursor: pointer;
-	width: 132px;
-	height: 44px;
-	font-size: 14px;
-	border: none;
-	background-color: #e0e0e0;
-	border-radius: 4px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: #bdbdbd;
-	font-weight: 400;
-	box-sizing: border-box;
-	line-height: 18px;
+  cursor: pointer;
+  width: 132px;
+  height: 44px;
+  font-size: 14px;
+  border: none;
+  background-color: rgb(53, 197, 240);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 400;
+  box-sizing: border-box;
+  line-height: 18px;
 `;
 
 const SubHeaderContainer = styled.div`
-	border-bottom: 1px solid #dbdbdb;
-	width: 100%;
-	height: 49px;
-	display: flex;
-	justify-content: center;
+  border-bottom: 1px solid #dbdbdb;
+  width: 100%;
+  height: 49px;
+  display: flex;
+  justify-content: center;
 `;
 
 const PictureButton = styled.div`
-	cursor: pointer;
-	border-bottom: 2px solid rgb(47, 52, 56);
-	width: 37px;
-	height: 49px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: rgb(47, 52, 56);
-	font-weight: 700;
-	font-size: 15px;
+  cursor: pointer;
+  border-bottom: 2px solid rgb(47, 52, 56);
+  width: 37px;
+  height: 49px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(47, 52, 56);
+  font-weight: 700;
+  font-size: 15px;
 `;
 
 const MainContainer = styled.div`
@@ -108,7 +110,7 @@ const MainContainer = styled.div`
   height: 480px;
   margin: auto;
   margin-top: 40px;
-	display: flex;
+  display: flex;
 `;
 
 const ContentsUploadContainer = styled.div`
@@ -130,21 +132,20 @@ const ContentTextArea = styled.textarea`
   padding: 16px;
   font-size: 14px;
   line-height: 20px;
-
 `;
 
 const SpaceInfo = styled.div`
-	cursor: pointer;
-	border: 2px solid gray;
-	width: 437px;
-	height: 40px;
-	border: 1px solid #dbdbdb;
-	border-radius: 4px;
-	margin-top: 10px;
-	color: #dbdbdb;
-	display: flex;
-	align-items: center;
-	padding-left: 10px;
-	font-size: 15px;
+  cursor: pointer;
+  border: 2px solid gray;
+  width: 437px;
+  height: 40px;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  margin-top: 10px;
+  color: #dbdbdb;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  font-size: 15px;
 `;
 export default HomePicturePost;
