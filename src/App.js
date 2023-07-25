@@ -20,7 +20,6 @@ import { Comment } from "./pages/Comment";
 const queryClient = new QueryClient();
 
 function App() {
-
   return (
     <QueryClientProvider client={queryClient}>
       <Provider store={store}>
@@ -40,7 +39,6 @@ function App() {
       </Provider>
     </QueryClientProvider>
   );
-
 }
 
 export default App;
