@@ -54,7 +54,7 @@ export default GlobalNavBar;
 
 const StGlobalNavBar = styled.div`
   z-index: 1102;
-  position: fixed;
+  /* position: fixed; */
   display: flex;
   justify-content: center;
   align-items: center;
