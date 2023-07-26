@@ -30,7 +30,7 @@ function App() {
 						<Route path='/login' element={<LogIn />} />
 						<Route path='/cardlayout' element={<CardLayout />} />
 						<Route path='/comment' element={<Comment />} />
-						<Route path='/detail' element={<Detail />} />
+						<Route path='/detail/:id' element={<Detail />} />
 						<Route path='/homepicture' element={<HomePicture />} />
 						<Route path='/homepicturepost' element={<HomePicturePost />} />
 					</Routes>
