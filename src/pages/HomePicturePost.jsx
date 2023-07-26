@@ -27,9 +27,9 @@ const HomePicturePost = () => {
   // });
 
   const [isOpen, setIsOpen] = useState(false);
-  const [titleImage, setTitleImage] = useState("");
+  const [titleImage, setTitleImage] = useState([]);
   const [contents, setContents] = useState("");
-
+  console.log(titleImage);
   const OnclickModalOpen = () => {
     setIsOpen(!isOpen);
   };
@@ -74,24 +74,59 @@ const HomePicturePost = () => {
 
   // 서버로 전송 formData
 
+  const isJsonString = (str) => {
+    try {
+      JSON.parse(str);
+    } catch (e) {
+      return false;
+    }
+    return true;
+  };
+
   const handleSubmit = async () => {
     const Data = new FormData();
-    console.log("Data: ", Data);
-    Data.append("contents", contents);
-    Data.append("titleImage", titleImage);
+    const content = { content: contents };
+    Data.append(
+      "content",
+      new Blob([JSON.stringify(content)], { type: "application/json" })
+    );
+    console.log("이미지", titleImage);
+    // if (titleImage) {
+    //   Data.append("titleImage", titleImage);
+    // }
+
+    titleImage.forEach((file, index) => {
+      if (index === 0) {
+        Data.append("titleImage", file);
+        console.log("첫번째", file);
+      } else {
+        Data.append(`subImage${index}`, file);
+        console.log("두번째 부터:", file);
+      }
+    });
+
+    // if (!isJsonString(JSON.stringify(content))) {
+    //   console.error("데이터가 올바른 JSON 형식이 아닙니다.");
+    //   return;
+    // }
+    // for (const key of Data.keys()) {
+    //   console.log("key = ", key);
+    //   console.log("value = ", Data.get(key));
+    // }
 
     try {
       const accessToken = getCookie("accessToken");
       console.log(accessToken);
+      console.log("데이터임미다", Data);
       const res = await axios.post(
         `${process.env.REACT_APP_SERVER_URL}/api/posts`,
 
         Data,
         {
           headers: {
-            Accept: "*/*",
-            Authorization: `${accessToken}`,
+            // Accept: "*/*",
             "Content-Type": "multipart/form-data",
+            Authorization: accessToken,
           },
         }
       );
@@ -255,4 +290,5 @@ const SpaceInfo = styled.div`
   padding-left: 10px;
   font-size: 15px;
 `;
+
 export default HomePicturePost;
