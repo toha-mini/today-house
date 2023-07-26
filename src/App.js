@@ -16,7 +16,6 @@ import { Detail } from "./pages/Detail";
 
 import { Comment } from "./pages/Comment";
 
-
 const queryClient = new QueryClient();
 
 function App() {
@@ -31,7 +30,7 @@ function App() {
             <Route path="/login" element={<LogIn />} />
             <Route path="/cardlayout" element={<CardLayout />} />
             <Route path="/comment" element={<Comment />} />
-            <Route path="/detail" element={<Detail />} />
+            <Route path="/detail/:id" element={<Detail />} />
             <Route path="/homepicture" element={<HomePicture />} />
             <Route path="/homepicturepost" element={<HomePicturePost />} />
           </Routes>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { styled } from 'styled-components'
 import { AiOutlineHeart } from 'react-icons/ai';
 import { AiFillHeart } from 'react-icons/ai';
+
 export const Comment = () => {
 
     const [isFilledHeart, setIsFilledHeart] = useState(false)
@@ -13,6 +14,10 @@ export const Comment = () => {
         setIsLiked((prevState) => !prevState);
         setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
     }
+
+ 
+
+
 
   return (
     <CommentLayout>
