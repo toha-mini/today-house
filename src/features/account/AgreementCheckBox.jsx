@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 
 const AgreementCheckBox = () => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const OnclickCheckInput = () => {
+    // 리렌더가 일어나면 지금 값이 가리키는 참조값이랑 렌더링 후 참조값이 다르기때문에 이전꺼에서 반대로해줘가 안전.
+    setIsChecked((prev) => !prev);
+  };
   return (
     <div>
       <LabelName>약관동의</LabelName>
@@ -16,7 +22,11 @@ const AgreementCheckBox = () => {
 
         <div>
           <AgreeItemsContainer>
-            <CheckInput type="checkbox" />
+            <CheckInput
+              type="checkbox"
+              checked={isChecked}
+              onChange={OnclickCheckInput}
+            />
             <PlusContents>
               만 14세 이상입니다
               <Essential>(필수)</Essential>
@@ -27,7 +37,6 @@ const AgreementCheckBox = () => {
             <PlusContents>
               이용약관
               <Essential>(필수)</Essential>
-              <span>버튼</span>
             </PlusContents>
           </AgreeItemsContainer>
           <AgreeItemsContainer>
@@ -35,7 +44,6 @@ const AgreementCheckBox = () => {
             <PlusContents>
               개인정보수집 및 이용동의
               <Essential>(필수)</Essential>
-              <span>버튼</span>
             </PlusContents>
           </AgreeItemsContainer>
           <AgreeItemsContainer>
@@ -43,7 +51,6 @@ const AgreementCheckBox = () => {
             <PlusContents>
               개인정보 마케팅 활용 동의
               <Select>(선택)</Select>
-              <span>버튼</span>
             </PlusContents>
           </AgreeItemsContainer>
           <AgreeItemsContainer>
@@ -84,11 +91,20 @@ const AreeTitleContainer = styled.div`
   display: flex;
   align-items: center;
 `;
-
 const CheckInput = styled.input`
+  appearance: none;
+  border: 1px solid #2f3438;
+  border-radius: 4px;
   width: 18px;
   height: 18px;
+  margin-right: 5px;
+
   &:checked {
+    border-color: transparent;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
+    background-size: 100% 100%;
+    background-position: 50%;
+    background-repeat: no-repeat;
     background-color: #35c5f0;
   }
 `;

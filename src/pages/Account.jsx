@@ -10,90 +10,87 @@ import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 
 const Account = () => {
+  const instanceAxios = axios.create({
+    baseURL: process.env.REACT_APP_SERVER_URL,
+    // baseURL : "http://13.209.96.200:8080"
+  });
 
-	const instanceAxios = axios.create({
-		baseURL : process.env.REACT_APP_SERVER_URL
-		// baseURL : "http://13.209.96.200:8080"
-	  })
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [ErrorMessage, setErrorMessage] = useState("");
 
+  const initTextFiled = () => {
+    setEmail("");
+    setPassword("");
+  };
 
+  //   const SignupState = async (event) => {
+  // 	event.preventDefault();
+  // 	try {
+  // 	  const payload = {
+  // 		email:email,
+  // 		password:password,
+  // 		nickname:nickname
+  // 	  }
+  // 	  let res = await instanceAxios.post(`/api/auth/sign-up`, payload)
+  // 	  if(res.data.status >= 300){
+  // 		alert(res.data.message)
+  // 		return;
+  // 	  }
+  // 	  console.log(res)
+  // 	  initTextFiled();
 
-	  const [email, setEmail] = useState("");
-	  const [password, setPassword] = useState("");
-	  const [nickname, setNickname] = useState("");
+  // 	  } catch (error) {
+  // 		console.log(error)
+  // 	  }
+  //   }
 
-	  const initTextFiled = () =>{
-		setEmail("");
-		setPassword("");
-	  }
+  // ------------------------- 리액트 쿼리로 리팩토링-------------------------------
 
+  const mutation = useMutation(async (payload) => {
+    const response = await axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/api/auth/sign-up`,
+      payload
+    );
+    return response.data;
+  });
 
-	//   const SignupState = async (event) => {
-	// 	event.preventDefault();
-	// 	try {
-	// 	  const payload = {
-	// 		email:email,
-	// 		password:password,
-	// 		nickname:nickname
-	// 	  }
-	// 	  let res = await instanceAxios.post(`/api/auth/sign-up`, payload)
-	// 	  if(res.data.status >= 300){
-	// 		alert(res.data.message)
-	// 		return;
-	// 	  }
-	// 	  console.log(res)
-	// 	  initTextFiled();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const payload = {
+        email: email,
+        password: password,
+        nickname: nickname,
+      };
 
-	// 	  } catch (error) {
-	// 		console.log(error)
-	// 	  }
-	//   }
+      const res = await mutation.mutateAsync(payload);
+      console.log(res);
+      if (res.data.status >= 300) {
+        alert(res.data.message);
+        return;
+      }
+      console.log(res);
+      initTextFiled();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  // ------------------------- 리액트 쿼리로 리팩토링-------------------------------
 
-// ------------------------- 리액트 쿼리로 리팩토링-------------------------------
+  const inputEmailHandler = (event) => {
+    setEmail(event.target.value);
+  };
 
-	const mutation = useMutation(async (payload) => {
-		const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/auth/sign-up`, payload)
-		return response.data;
-	  })
+  const inputPasswordHandler = (event) => {
+    setPassword(event.target.value);
+  };
 
-
-	  const handleSubmit = async (event) =>{
-		event.preventDefault();
-		try{
-			const payload = {
-				email:email,
-				password:password,
-				nickname:nickname
-			}
-
-			const res = await mutation.mutateAsync(payload)
-			console.log(res)
-			if(res.data.status >= 300){
-				alert(res.data.message)
-				return
-			}
-			console.log(res)
-			initTextFiled();
-		}catch (error) {
-			console.log(error)
-		}
-	  }
-
-// ------------------------- 리액트 쿼리로 리팩토링-------------------------------
-
-	  const inputEmailHandler = (event) => {
-		setEmail(event.target.value);
-	  }
-  
-	  const inputPasswordHandler = (event) => {
-		setPassword(event.target.value);
-	  }
-	  
-	  const inputNicknameHandler = (event) => {
-		setNickname(event.target.value);
-	  }
-  
+  const inputNicknameHandler = (event) => {
+    setNickname(event.target.value);
+  };
 
   const navigate = useNavigate();
   const onClickSocial = () => {
@@ -130,19 +127,20 @@ const Account = () => {
         <form>
           <LabelName>이메일</LabelName>
 
-  {/* 회원가입 인박스 */}
+          {/* 회원가입 인박스 */}
 
-          <EmailInput 
-				text="text"
-				placeholder="이메일"  
-				name='id'
-                autoFocus
-                autoComplete="current-id"
-                label="아이디"
-                required
-                value={email}
-                onChange={inputEmailHandler}
-                fullWidth />
+          <EmailInput
+            text="text"
+            placeholder="이메일"
+            name="id"
+            autoFocus
+            autoComplete="current-id"
+            label="아이디"
+            required
+            value={email}
+            onChange={inputEmailHandler}
+            fullWidth
+          />
           <AtSign>@</AtSign>
           <EmailSelect>
             <EmailOption>선택해주세요</EmailOption>
@@ -162,65 +160,70 @@ const Account = () => {
             <EmailCheckContents>중복된 이메일입니다.</EmailCheckContents>
           </div>
           <LabelName>비밀번호</LabelName>
+
           <CheckContents>
             영문,숫자를 포함한 8자 이상의 비밀번호를 입력해주세요.
           </CheckContents>
-		  {/* 회원가입 인박스 */}
-          <InputBox 
-				type="password" 
-				placeholder="비밀번호"  
-				margin="normal"
-                fullWidth
-                name='password'
-                autoComplete="current-password"
-                label="패스워드"
-                value={password}
-                onChange={inputPasswordHandler} />
+          {/* 회원가입 인박스 */}
+          <InputBox
+            type="password"
+            placeholder="비밀번호"
+            margin="normal"
+            fullWidth
+            name="password"
+            autoComplete="current-password"
+            label="패스워드"
+            value={password}
+            onChange={inputPasswordHandler}
+          />
 
           <EmailCheckContents>필수입력항목입니다.</EmailCheckContents>
           <LabelName>비밀번호 확인</LabelName>
-          <InputBox 
-				type="password" 
-				placeholder="비밀번호"  
-				margin="normal"
-				fullWidth
-				name='password'
-				autoComplete="current-password"
-				label="패스워드"
-				value={password}
-				onChange={inputPasswordHandler}
-		   />
+          <InputBox
+            type="password"
+            placeholder="비밀번호"
+            margin="normal"
+            fullWidth
+            name="password"
+            autoComplete="current-password"
+            label="패스워드"
+            value={password}
+            onChange={inputPasswordHandler}
+          />
           <EmailCheckContents>
             확인을 위해 비밀번호를 한 번 더 입력해주세요.
           </EmailCheckContents>
           <LabelName>닉네임</LabelName>
 
-		  {/* 닉네인 인박스 */}
+          {/* 닉네인 인박스 */}
 
           <CheckContents>
             다른 유저와 겹치지 않도록 입력해주세요.(2~15자)
           </CheckContents>
-          <InputBox 
-		  type="text" 
-		  placeholder="별명(2~15자)" 
-		  name='id'
-		  autoFocus
-		  autoComplete="current-id"
-		  label="아이디"
-		  required
-		  value={nickname}
-		  onChange={inputNicknameHandler}
-		  fullWidth/>
+          <InputBox
+            type="text"
+            placeholder="별명(2~15자)"
+            name="id"
+            autoFocus
+            autoComplete="current-id"
+            label="아이디"
+            required
+            value={nickname}
+            onChange={inputNicknameHandler}
+            fullWidth
+          />
           <EmailCheckContents>사용 중인 별명입니다.</EmailCheckContents>
           <AgreementCheckBox />
           <div>
-            <AccountButton 
-			  type='submit'
-			  fullWidth
-			  variant="contained"
-			  sx={{ mt: 1, mb: 3 }}
-			  onClick={handleSubmit}
-			  >회원가입하기</AccountButton>
+            <AccountButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 1, mb: 3 }}
+              onClick={handleSubmit}
+            >
+              회원가입하기
+            </AccountButton>
           </div>
           <FooterContainer>
             <span>이미 아이디가 있으신가요?</span>

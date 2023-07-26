@@ -29,6 +29,7 @@ const HomePicturePost = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [titleImage, setTitleImage] = useState([]);
   const [contents, setContents] = useState("");
+  const [menu, setMenu] = useState("공간정보추가");
   console.log(titleImage);
   const OnclickModalOpen = () => {
     setIsOpen(!isOpen);
@@ -177,11 +178,17 @@ const HomePicturePost = () => {
               setIsOpen={setIsOpen}
               isOpen={isOpen}
             >
-              공간정보추가
+              {menu}
               <BiSolidDownArrow style={{ marginLeft: "300px" }} />
             </SpaceInfo>
           </div>
-          {isOpen && <SpaceInofoModal setIsOpen={setIsOpen} isOpen={isOpen} />}
+          {isOpen && (
+            <SpaceInofoModal
+              setIsOpen={setIsOpen}
+              isOpen={isOpen}
+              setMenu={setMenu}
+            />
+          )}
         </ContentsUploadContainer>
       </MainContainer>
     </PageContainer>

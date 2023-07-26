@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 
-const SpaceInofoModal = ({ isOpen, setIsOpen }) => {
-  const [menu, setMenu] = useState("공간정보추가");
+const SpaceInofoModal = ({ isOpen, setIsOpen ,setMenu}) => {
   const ItemOnClick = (event) => {
     setMenu(event.target.innerHTML);
-    // console.log(event.target.innerHTML);
     setIsOpen(!isOpen);
   };
 
