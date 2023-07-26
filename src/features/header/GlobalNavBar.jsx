@@ -3,72 +3,72 @@ import cart from "../../imgs/kart.png";
 import logo from "../../imgs/logo.jpeg";
 import styled from "styled-components";
 import PostModal from "./PostModal";
+import { useNavigate } from "react-router-dom";
 
 const GlobalNavBar = () => {
-  console.log("GlobalNavBar is rendering!!!");
-  const [selected, setSelected] = useState(null);
-  return (
-    <StGlobalNavBar>
-      <GlobalNavBarContainer>
-        <ContainerInner>
-          <StLogo>
-            <Logo src={logo} />
-          </StLogo>
-          <StGlobalNav1>
-            <GlobalNav1
-              selected={selected === "커뮤니티"}
-              onClick={() => setSelected("커뮤니티")}
-            >
-              {"커뮤니티"}
-            </GlobalNav1>
-            <GlobalNav1
-              selected={selected === "쇼핑"}
-              onClick={() => setSelected("쇼핑")}
-            >
-              {"쇼핑"}
-            </GlobalNav1>
-            <GlobalNav1
-              selected={selected === "이사/시공/생활"}
-              onClick={() => setSelected("이사/시공/생활")}
-            >
-              {"이사/시공/생활"}
-            </GlobalNav1>
-          </StGlobalNav1>
-          <StGlobalNav2>
-            <StGlobalInputNav>
-              <GlobalInput type="text" />
-            </StGlobalInputNav>
-            <GlobalNavCartWrap>
-              <GlobalNavCart src={cart} />
-            </GlobalNavCartWrap>
-            <StGlobalNavContainer>
-              <GlobalNavTag>
-                <GlobalNav2 $noBorder>{"로그인"}</GlobalNav2>
-                <GlobalNav2>{"회원가입"}</GlobalNav2>
-                <GlobalNav2>{"고객센터"}</GlobalNav2>
-              </GlobalNavTag>
-              <PostModal />
-            </StGlobalNavContainer>
-          </StGlobalNav2>
-        </ContainerInner>
-      </GlobalNavBarContainer>
-    </StGlobalNavBar>
-  );
+	const navigate = useNavigate();
+	const [selected, setSelected] = useState(null);
+
+	const onLoginButtonHandler = () => {
+		navigate("/login");
+	};
+	return (
+		<StGlobalNavBar>
+			<GlobalNavBarContainer>
+				<ContainerInner>
+					<StLogo>
+						<Logo src={logo} />
+					</StLogo>
+					<StGlobalNav1>
+						<GlobalNav1 selected={selected === "커뮤니티"} onClick={() => setSelected("커뮤니티")}>
+							{"커뮤니티"}
+						</GlobalNav1>
+						<GlobalNav1 selected={selected === "쇼핑"} onClick={() => setSelected("쇼핑")}>
+							{"쇼핑"}
+						</GlobalNav1>
+						<GlobalNav1
+							selected={selected === "이사/시공/생활"}
+							onClick={() => setSelected("이사/시공/생활")}>
+							{"이사/시공/생활"}
+						</GlobalNav1>
+					</StGlobalNav1>
+					<StGlobalNav2>
+						<StGlobalInputNav>
+							<GlobalInput type='text' />
+						</StGlobalInputNav>
+						<GlobalNavCartWrap>
+							<GlobalNavCart src={cart} />
+						</GlobalNavCartWrap>
+						<StGlobalNavContainer>
+							<GlobalNavTag>
+								<GlobalNav2 $noBorder onClick={onLoginButtonHandler}>
+									{"로그인"}
+								</GlobalNav2>
+								<GlobalNav2>{"회원가입"}</GlobalNav2>
+								<GlobalNav2>{"고객센터"}</GlobalNav2>
+							</GlobalNavTag>
+							<PostModal />
+						</StGlobalNavContainer>
+					</StGlobalNav2>
+				</ContainerInner>
+			</GlobalNavBarContainer>
+		</StGlobalNavBar>
+	);
 };
 
 export default GlobalNavBar;
 
 const StGlobalNavBar = styled.div`
-  z-index: 1102;
-  position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  background: #ffffff;
-  height: 80px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+	z-index: 1102;
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	background: #ffffff;
+	height: 80px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 `;
 
 const GlobalNavBarContainer = styled.div`
