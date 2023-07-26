@@ -9,6 +9,7 @@ import { FiShare2 } from 'react-icons/fi';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { instance } from '../api/oha';
 
 
 function getCookie(cookieName){
@@ -45,6 +46,9 @@ export const Detail = () => {
 
     const [isFilledBook, setIsFilledBook] = useState(false)
     const [isLiked, setIsLiked] = useState(false);
+
+    const [commentText, setCommentText] = useState('');
+
 
 
     const handleBookClick = () => {
@@ -111,6 +115,43 @@ console.log(cardData)
     }
 };
 // -----------------------좋아요 기능----------------------------
+
+
+// -----------------------댓글 추가 기능----------------------------
+
+   // 댓글 추가 기능
+   const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    try {
+        // 댓글 작성 요청
+        const accessToken = getCookie("accessToken");
+        console.log(accessToken);
+        await instance.post(
+            `/api/comments`,
+            {
+                postId: id,
+                content: commentText
+            },
+            {
+                headers: {
+                    Accept: "*/*",
+                    Authorization: `${accessToken}`,
+                },
+            }
+        )
+
+        // 댓글 작성 후 폼 초기화
+        setCommentText('');
+    } catch (error) {
+        console.log('댓글 작성 실패', error);
+    }
+}
+
+// -----------------------댓글 추가 기능----------------------------
+
+
+
+
   return (
     <PicTotal>
         <PicPadding>
@@ -154,11 +195,19 @@ console.log(cardData)
                                     <CommentButDiv4>
                                         <CommentButDiv3>
                                             <CommentButDiv2>
-                                                <CommentLine contenteditable="true" data-placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다:)" size='44' isEmpty={isEmpty} onInput={handleChange}>
+                                                <CommentLine 
+                                                type='text'
+                                                value={commentText}
+                                                onChange={(e) => setCommentText(e.target.value)}
+                                                contenteditable="true" 
+                                                placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다:)" 
+                                                size='44' 
+                                                isEmpty={isEmpty} 
+                                                onInput={handleChange}>
 
                                                 </CommentLine>
                                                 <CommentButDiv>
-                                                    <CommentBtn>
+                                                    <CommentBtn onClick={handleCommentSubmit}>
                                                         입력
                                                     </CommentBtn>
                                                 </CommentButDiv>
@@ -167,6 +216,18 @@ console.log(cardData)
                                     </CommentButDiv4>
                                 </CommentButDiv5>
                             </CommentButDiv6>
+                            <div>
+                                    {cardData.commentList && cardData.commentList.map((comment) => (
+                                    <Comment 
+                                        key={comment.commentId}
+                                        id={comment.commentId}
+                                        content={comment.content} 
+                                        username={comment.username}
+                                        userIdenticonUrl={comment.userIdenticonUrl}
+                                        onDelete={() => handleCommentDelete(comment.commentId)}
+                                    />
+                                ))}
+                            </div>
                         </CommentDiv>
                     
                     </div>
@@ -258,7 +319,7 @@ const Title = styled.p`
     color: rgb(47, 52, 56);
     white-space: pre-line;
 `
-const CommentLine = styled.div`
+const CommentLine = styled.input`
         word-break: break-word;
     cursor: text;
     display: inline-block;

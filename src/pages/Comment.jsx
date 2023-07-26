@@ -3,11 +3,12 @@ import { styled } from 'styled-components'
 import { AiOutlineHeart } from 'react-icons/ai';
 import { AiFillHeart } from 'react-icons/ai';
 
-export const Comment = () => {
+export const Comment = (id) => {
 
     const [isFilledHeart, setIsFilledHeart] = useState(false)
     const [isLiked, setIsLiked] = useState(false);
     const [likeCount, setLikeCount] = useState(0);
+
 
     const handleHeartClick = () => {
         setIsFilledHeart(!isFilledHeart)
@@ -15,7 +16,7 @@ export const Comment = () => {
         setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
     }
 
- 
+
 
 
 
