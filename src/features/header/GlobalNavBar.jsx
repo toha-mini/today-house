@@ -3,10 +3,15 @@ import cart from "../../imgs/kart.png";
 import logo from "../../imgs/logo.jpeg";
 import styled from "styled-components";
 import PostModal from "./PostModal";
+import { useNavigate } from "react-router-dom";
 
 const GlobalNavBar = () => {
-	console.log("GlobalNavBar is rendering!!!");
+	const navigate = useNavigate();
 	const [selected, setSelected] = useState(null);
+
+	const onLoginButtonHandler = () => {
+		navigate("/login");
+	};
 	return (
 		<StGlobalNavBar>
 			<GlobalNavBarContainer>
@@ -36,7 +41,9 @@ const GlobalNavBar = () => {
 						</GlobalNavCartWrap>
 						<StGlobalNavContainer>
 							<GlobalNavTag>
-								<GlobalNav2 $noBorder>{"로그인"}</GlobalNav2>
+								<GlobalNav2 $noBorder onClick={onLoginButtonHandler}>
+									{"로그인"}
+								</GlobalNav2>
 								<GlobalNav2>{"회원가입"}</GlobalNav2>
 								<GlobalNav2>{"고객센터"}</GlobalNav2>
 							</GlobalNavTag>
@@ -52,7 +59,6 @@ const GlobalNavBar = () => {
 export default GlobalNavBar;
 
 const StGlobalNavBar = styled.div`
-
 	z-index: 1102;
 	position: fixed;
 	display: flex;
@@ -63,7 +69,6 @@ const StGlobalNavBar = styled.div`
 	height: 80px;
 	padding-top: 10px;
 	padding-bottom: 10px;
-
 `;
 
 const GlobalNavBarContainer = styled.div`

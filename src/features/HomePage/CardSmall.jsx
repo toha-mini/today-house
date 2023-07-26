@@ -1,30 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styled from "styled-components";
 import profile from "../../imgs/default_profile.png";
 import BookMark from "./BookMark";
 import BookMarkOn from "./BookMarkOn";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getBookMarkLists, postBookMarkLists } from "../../api/oha";
+import { postBookMarkLists } from "../../api/oha";
 
 const CardSmall = ({ card = [], title, subtitle, more, src }) => {
-	const { data: bookmarkdata } = useQuery(["bookmark"], getBookMarkLists);
+	// const { data: bookmarkdata } = useQuery(["bookmark"], getBookMarkLists, {
+	// 	refetchOnWindowFocus: true,
+	// 	staleTime: 360 * 1000, // 1분
+	// });
 	const queryClient = useQueryClient();
 	const mutation = useMutation(postBookMarkLists, {
-		onSuccess: (bookmarkdata) => {
-			queryClient.invalidateQueries(["bookmark"]);
+		onMutate: ({ id, index }) => {
+			return { index };
+		},
+		onSuccess: (bookmarkdata, variables, context) => {
+			// console.log(context);
+			// const newOnScrap = [...onScrap];
+			// newOnScrap[context.index] = !newOnScrap[context.index];
+			// setOnScrap(newOnScrap);
+			// queryClient.invalidateQueries(["bookmark"]);
 		},
 	});
 
 	const [onScrap, setOnScrap] = useState(Array(card.length).fill(false));
 
-	const bookMarkControlHandler = (index) => {
-		const newOnScrap = [...onScrap];
-		newOnScrap[index] = !newOnScrap[index];
-		setOnScrap(newOnScrap);
-
-		mutation.mutate({ id: card[index].postId });
-		console.log({ id: card[index].postId });
+	const bookMarkControlHandler = async (index) => {
+		try {
+			const res = await mutation.mutateAsync({ id: card[index].postId, index });
+			console.log(res.isScrap);
+			const newOnScrap = [...onScrap];
+			newOnScrap[index] = res.scrap;
+			setOnScrap(newOnScrap);
+		} catch (error) {
+			console.error(error);
+		}
 	};
+	useEffect(() => {
+		console.log(card.map((item) => item.isScrap));
+		setOnScrap(card && card.map((item) => item.isScrap));
+	}, [card]);
 
 	return (
 		<>
