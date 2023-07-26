@@ -3,7 +3,7 @@ import React from "react";
 const BookMark = () => {
 	return (
 		<svg
-			class='css-q7lffx'
+			className='css-q7lffx'
 			width='24'
 			height='24'
 			viewBox='0 0 24 24'

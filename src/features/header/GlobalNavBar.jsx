@@ -5,7 +5,7 @@ import styled from "styled-components";
 import PostModal from "./PostModal";
 import { useNavigate } from "react-router-dom";
 import { PiBellLight } from "react-icons/pi";
-import { LiaBookmarkSolid } from "react-icons/li";
+// import { LiaBookmarkSolid } from "react-icons/li";
 
 const GlobalNavBar = () => {
 	const navigate = useNavigate();
@@ -49,7 +49,7 @@ const GlobalNavBar = () => {
 						<StGlobalInputNav>
 							<GlobalInput type='text' />
 						</StGlobalInputNav>
-						{isLoggedIn ? (
+						{!isLoggedIn ? (
 							<>
 								<GlobalNavCartWrap>
 									<GlobalNavCart src={cart} />
@@ -67,7 +67,7 @@ const GlobalNavBar = () => {
 							</>
 						) : (
 							<>
-								<LiaBookmarkSolid />
+								{/* <LiaBookmarkSolid /> */}
 								<PiBellLight size='28px' />
 								<GlobalNavCart src={cart} />
 								<PostModal />

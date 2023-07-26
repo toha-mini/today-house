@@ -5,6 +5,7 @@ import BookMark from "./BookMark";
 import BookMarkOn from "./BookMarkOn";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { postBookMarkLists } from "../../api/oha";
+import { useNavigate } from "react-router-dom";
 
 const CardSmall = ({ card = [], title, subtitle, more, src }) => {
 	// const { data: bookmarkdata } = useQuery(["bookmark"], getBookMarkLists, {
@@ -12,6 +13,8 @@ const CardSmall = ({ card = [], title, subtitle, more, src }) => {
 	// 	staleTime: 360 * 1000, // 1분
 	// });
 	const queryClient = useQueryClient();
+	const navigate = useNavigate();
+
 	const mutation = useMutation(postBookMarkLists, {
 		onMutate: ({ id, index }) => {
 			return { index };
@@ -24,6 +27,11 @@ const CardSmall = ({ card = [], title, subtitle, more, src }) => {
 			// queryClient.invalidateQueries(["bookmark"]);
 		},
 	});
+
+	const moveDetailButtonHandler = (id) => {
+		console.log(id);
+		navigate(`/detail/${id}`);
+	};
 
 	const [onScrap, setOnScrap] = useState(Array(card.length).fill(false));
 
@@ -47,7 +55,7 @@ const CardSmall = ({ card = [], title, subtitle, more, src }) => {
 		<>
 			{card &&
 				card.map((item, index) => (
-					<CardSmallItem key={index}>
+					<CardSmallItem key={index} onClick={() => moveDetailButtonHandler(item.postId)}>
 						<CardInnerWrap>
 							<CardInnerImageWrap>
 								<CardInnerImageItem src={item.titleImage} />

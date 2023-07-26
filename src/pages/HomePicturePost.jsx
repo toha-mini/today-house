@@ -6,7 +6,6 @@ import SpaceInofoModal from "../features/homepicturepost/SpaceInofoModal";
 import ImageUpload from "../features/homepicturepost/ImageUpload";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useQueryClient } from "@tanstack/react-query";
 
 function getCookie(cookieName) {
 	var cookieValue = null;
@@ -25,7 +24,6 @@ const HomePicturePost = () => {
 	//   baseURL: process.env.REACT_APP_SERVER_URL,
 	//   // baseURL : "http://13.209.96.200:8080"
 	// });
-
 	const navigate = useNavigate();
 	const [isOpen, setIsOpen] = useState(false);
 	const [titleImage, setTitleImage] = useState([]);
