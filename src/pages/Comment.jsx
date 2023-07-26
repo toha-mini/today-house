@@ -1,69 +1,88 @@
-import React, { useState } from "react";
-import { styled } from "styled-components";
-import { AiOutlineHeart } from "react-icons/ai";
-import { AiFillHeart } from "react-icons/ai";
 
-export const Comment = () => {
-	const [isFilledHeart, setIsFilledHeart] = useState(false);
-	const [isLiked, setIsLiked] = useState(false);
-	const [likeCount, setLikeCount] = useState(0);
+import React, { useState } from 'react'
+import { styled } from 'styled-components'
+import { AiOutlineHeart } from 'react-icons/ai';
+import { AiFillHeart } from 'react-icons/ai';
+import formatTimeAgo from '../time';
 
-	const handleHeartClick = () => {
-		setIsFilledHeart(!isFilledHeart);
-		setIsLiked((prevState) => !prevState);
-		setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
-	};
 
-	return (
-		<CommentLayout>
-			<CommentDivAll>
-				<CommentImgDiv>
-					<CommentFigure>
-						<Emoticon src='https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/164890162254034673.jpeg?w=1440' />
-					</CommentFigure>
-				</CommentImgDiv>
-				<CommentAll>
-					<CommentNameDiv>
-						<CommentName>Royce Kim</CommentName>
-					</CommentNameDiv>
-					<CommentTitle>정말 깔끔하네요</CommentTitle>
-					<CommentDiv>
-						<CommentMonth>4개월전</CommentMonth>
-						<LikeFlex>
-							<Comma>.</Comma>
-							<LikeButton>
-								<LikeEmoticon onClick={handleHeartClick}>
-									{isFilledHeart ? (
-										<AiFillHeart color='#43C5F0' size={16} />
-									) : (
-										<AiOutlineHeart size={16} />
-									)}
-								</LikeEmoticon>
-								{/* 라이크 카운트 */}
-								<LikeText>{isLiked ? "" : "좋아요"}</LikeText>
-								{isLiked && <LikeCounter>{likeCount}</LikeCounter>}
-							</LikeButton>
-						</LikeFlex>
+export const Comment = ({commentData, id, nickname, content ,username,createdAt}) => {
 
-						<LikeFlex>
-							<Comma>.</Comma>
-							<LikeButton>
-								<LikeText>답글달기</LikeText>
-							</LikeButton>
-						</LikeFlex>
+    const [isFilledHeart, setIsFilledHeart] = useState(false)
+    const [isLiked, setIsLiked] = useState(false);
+    const [likeCount, setLikeCount] = useState(0);
 
-						<LikeFlex>
-							<Comma>.</Comma>
-							<LikeButton>
-								<LikeText>신고</LikeText>
-							</LikeButton>
-						</LikeFlex>
-					</CommentDiv>
-				</CommentAll>
-			</CommentDivAll>
-		</CommentLayout>
-	);
-};
+
+    const handleHeartClick = () => {
+        console.log(commentData)
+        setIsFilledHeart(!isFilledHeart)
+        setIsLiked((prevState) => !prevState);
+        setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
+    }
+
+   
+    const formattedCreatedDate = formatTimeAgo(createdAt);
+
+
+  return (
+    <CommentLayout>
+        <CommentDivAll>
+            <CommentImgDiv>
+                <CommentFigure>
+                  <Emoticon src="https://image.ohou.se/i/bucketplace-v2-development/uploads/cards/snapshots/164890162254034673.jpeg?w=1440"  />
+                </CommentFigure>
+            </CommentImgDiv>
+            <CommentAll>
+                <CommentNameDiv>
+                    <CommentName>
+                    {content}
+                    </CommentName>
+                </CommentNameDiv>
+                <CommentTitle>
+                     {nickname}
+                </CommentTitle>
+                <CommentDiv>
+                        <CommentMonth>
+                            {formattedCreatedDate}
+                        </CommentMonth>
+                        <LikeFlex>
+                            <Comma>.</Comma>
+                            <LikeButton>
+
+                                <LikeEmoticon onClick={handleHeartClick} >
+                                {isFilledHeart ? <AiFillHeart  color = "#43C5F0"size={16}/> : <AiOutlineHeart  size={16}/>}
+                                </LikeEmoticon>
+                            {/* 라이크 카운트 */}
+                                <LikeText>{isLiked ? '' : '좋아요'}</LikeText>
+                                {isLiked && <LikeCounter>{likeCount}</LikeCounter>}
+
+                            </LikeButton>
+                        </LikeFlex>
+
+                        <LikeFlex>
+                            <Comma>.</Comma>
+                            <LikeButton>
+                                <LikeText>
+                                    답글달기
+                                </LikeText>
+                            </LikeButton>
+                        </LikeFlex>
+
+                        <LikeFlex>
+                            <Comma>.</Comma>
+                            <LikeButton>
+                                <LikeText>
+                                    신고
+                                </LikeText>
+                            </LikeButton>
+                        </LikeFlex>
+                </CommentDiv>
+            </CommentAll>
+        </CommentDivAll>
+    </CommentLayout>
+  )
+}
+
 const LikeCounter = styled.span`
 	padding: 0px;
 	background-color: transparent;
@@ -203,17 +222,20 @@ const LikeEmoticon = styled.span`
 `;
 
 const LikeButton = styled.button`
-	cursor: pointer;
-	touch-action: manipulation;
-	display: flex;
-	-webkit-box-align: center;
-	align-items: center;
-	color: rgb(130, 140, 148);
-	padding: 0px;
-	background-color: transparent;
-	border: none;
-	font-size: 12px;
-	line-height: 16px;
-	font-weight: 500;
-	letter-spacing: -0.3px;
-`;
+
+    cursor: pointer;
+    touch-action: manipulation;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    color: rgb(130, 140, 148);
+    padding: 0px;
+    background-color: transparent;
+    border: none;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+`
+export default Comment;
+
