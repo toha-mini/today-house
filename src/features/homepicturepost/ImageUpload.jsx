@@ -3,16 +3,16 @@ import { useDropzone } from "react-dropzone";
 import camera from "../../imgs/camera.png";
 import styled from "styled-components";
 
-const DropZone = () => {
-  const [selectedImages, setSelectedImages] = useState("");
-  console.log("악", selectedImages);
+const DropZone = ({ setTitleImage, titleImage }) => {
+  // const [selectedImages, setSelectedImages] = useState("");
+  console.log("악", titleImage);
 
   useEffect(() => {
-    setSelectedImages(selectedImages);
-  }, [selectedImages]);
+    setTitleImage(titleImage);
+  }, [titleImage]);
 
   const onDrop = (acceptedFiles) => {
-    setSelectedImages(acceptedFiles);
+    setTitleImage(acceptedFiles);
     console.log("acceptedFiles", acceptedFiles);
   };
 
@@ -21,7 +21,7 @@ const DropZone = () => {
   return (
     <div {...getRootProps()}>
       <input {...getInputProps()} />
-      {selectedImages.length === 0 && (
+      {titleImage.length === 0 && (
         <ImageUploadContainer>
           <PictureContainer>
             <CameraLogo src={camera} alt="camera" />
@@ -31,15 +31,14 @@ const DropZone = () => {
           </PictureContainer>
         </ImageUploadContainer>
       )}
-      {selectedImages.length >= 1 && (
+      {titleImage.length >= 1 && (
         <div>
-          {selectedImages.map((file) => (
+          {titleImage.map((file) => (
             <StImageWrap>
               <Image
                 key={file.name}
                 src={URL.createObjectURL(file)}
                 alt={file.name}
-                s
               />
             </StImageWrap>
           ))}
