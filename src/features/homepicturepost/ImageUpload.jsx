@@ -1,83 +1,70 @@
-import React, { useState, useRef } from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from "react";
+import { useDropzone } from "react-dropzone";
 import camera from "../../imgs/camera.png";
+import styled from "styled-components";
 
-const ImageUpload = () => {
-  const [visible, setVisible] = useState(false);
-  const [selectedImages, setSelectedImages] = useState([null]);
-  console.log(selectedImages);
+const DropZone = () => {
+  const [selectedImages, setSelectedImages] = useState("");
+  console.log("악", selectedImages);
 
-  const handleImageSelect = (index) => (event) => {
-    const file = event.target.files[0];
+  useEffect(() => {
+    setSelectedImages(selectedImages);
+  }, [selectedImages]);
 
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const updatedImages = [...selectedImages];
-        updatedImages[index] = reader.result;
-        setSelectedImages(updatedImages.concat(null));
-      };
-      reader.readAsDataURL(file);
-    }
+  const onDrop = (acceptedFiles) => {
+    setSelectedImages(acceptedFiles);
+    console.log("acceptedFiles", acceptedFiles);
   };
 
-  const onClickplusImage = (index) => () => {
-    // 이미지버튼 추가하기 했을 때
-    document.getElementById(`imageInput-${index}`).click();
-  };
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
-    <ImageUploadContainer>
-      <Upload>
-        {selectedImages.map((imageSrc, index) => (
-          <StImageWrap key={index}>
+    <div {...getRootProps()}>
+      <input {...getInputProps()} />
+      {selectedImages.length === 0 && (
+        <ImageUploadContainer>
+          <PictureContainer>
             <CameraLogo src={camera} alt="camera" />
             <FirstContent>사진을 끌어다 놓으세요</FirstContent>
             <SecondContent>10장까지 올릴 수 있어요.</SecondContent>
-            {/*  */}
-            <input
-              id={`imageInput-${index}`}
-              type="file"
-              multiple="multiple"
-              accept="image/jpg, image/png, image/jpeg"
-              onChange={handleImageSelect(index)}
-              style={{ display: "none" }}
-            />
-            {imageSrc === null && (
-              <PcUploadButton onClick={onClickplusImage(index)}>
-                PC에서 불러오기
-              </PcUploadButton>
-            )}
-            {/*  */}
-            <Image src={imageSrc} alt="selected" />
-          </StImageWrap>
-        ))}
-      </Upload>
-    </ImageUploadContainer>
+            <UploadButton>PC에서 불러오기</UploadButton>
+          </PictureContainer>
+        </ImageUploadContainer>
+      )}
+      {selectedImages.length >= 1 && (
+        <div>
+          {selectedImages.map((file) => (
+            <StImageWrap>
+              <Image
+                key={file.name}
+                src={URL.createObjectURL(file)}
+                alt={file.name}
+                s
+              />
+            </StImageWrap>
+          ))}
+        </div>
+      )}
+    </div>
   );
 };
 
-export default ImageUpload;
-
-const Image = styled.img`
-  position: relative;
-  width: 430px;
-  max-height: 100%;
-  align-items: center;
-  // object-fit: cover;
-  // object-position: center;
-  overflow-y: scroll;
-`;
 const ImageUploadContainer = styled.div`
   background-color: rgb(247, 249, 250);
-  width: 428px;
+  width: 374px;
+  height: 374px;
   display: flex;
 `;
-
-const Upload = styled.div`
-  text-align: center;
+const PictureContainer = styled.div`
+  width: 374px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
+
 const CameraLogo = styled.img`
+  margin-bottom: 10px;
   width: 35px;
   height: 35px;
 `;
@@ -86,29 +73,19 @@ const FirstContent = styled.div`
   font-size: 16px;
   font-weight: 700;
   line-height: 20px;
+  margin-bottom: 5px;
 `;
-
 const SecondContent = styled.div`
   color: rgb(130, 140, 148);
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
-  margin-top: 2px;
+  margin-bottom: 5px;
 `;
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-`;
-const PcUploadButton = styled.div`
+const UploadButton = styled.div`
   cursor: pointer;
-  width: 124px;
+  width: 127px;
   height: 40px;
-  font-size: 14px;
-  border: none;
   background-color: rgb(53, 197, 240);
   border-radius: 4px;
   display: flex;
@@ -116,12 +93,20 @@ const PcUploadButton = styled.div`
   justify-content: center;
   color: rgb(255, 255, 255);
   font-weight: 400;
-  box-sizing: border-box;
-  line-height: 18px;
-  font-weight: 400;
 `;
 
 const StImageWrap = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
 `;
+
+const Image = styled.img`
+  max-width: 374px;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+`;
+export default DropZone;

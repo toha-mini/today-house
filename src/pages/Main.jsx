@@ -14,13 +14,11 @@ import { Cards_4 } from "../redux/module/homeSlice_4";
 import { Menu_1 } from "../redux/module/homeMenuSlice_1";
 import { Menu_2 } from "../redux/module/homeMenuSlice_2";
 import { Shopping_1 } from "../redux/module/shoppingSlice_1";
-import { PhotoReview } from "../redux/module/photoSlice";
-import { Interior } from "../redux/module/interiorSlice";
-import { useQueries, useQuery } from "@tanstack/react-query";
-import { getLists, getPhotoLists } from "../api/oha";
+import { useQuery } from "@tanstack/react-query";
+import { getPhotoLists } from "../api/oha";
 
 const Main = () => {
-	const { isLoading, isError, data, refetch } = useQuery(["photo"], getPhotoLists);
+	const { data } = useQuery(["photo"], getPhotoLists);
 	console.log("Main:", data);
 
 	const menu_1 = useSelector(Menu_1);
@@ -30,8 +28,6 @@ const Main = () => {
 	const card_3 = useSelector(Cards_3);
 	const card_4 = useSelector(Cards_4);
 	const shopping_1 = useSelector(Shopping_1);
-	const photo = useSelector(PhotoReview);
-	const interior = useSelector(Interior);
 
 	const housewarming = [
 		{ title: "🥇 20평 대! 공간 활용 best 4 🥇", card: card_1 },

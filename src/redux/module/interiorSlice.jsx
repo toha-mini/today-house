@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import housewarming13 from "../../imgs/housewarming13.jpeg";
 import housewarming14 from "../../imgs/housewarming14.avif";
 import housewarming15 from "../../imgs/housewarming15.jpeg";
-import housewarming16 from "../../imgs/housewarming16.avif";
 
 const initialState = [
 	{ src: housewarming13, title: "로망 실현, 테라스로 레벨 업!", text: "추억을 쌓아가는 전원 주택" },
