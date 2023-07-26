@@ -7,12 +7,15 @@ import naver from "../imgs/naver.png";
 import AgreementCheckBox from "../features/account/AgreementCheckBox";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useMutation } from "@tanstack/react-query";
 
 const Account = () => {
+
 	const instanceAxios = axios.create({
 		baseURL : process.env.REACT_APP_SERVER_URL
 		// baseURL : "http://13.209.96.200:8080"
 	  })
+
 
 
 	  const [email, setEmail] = useState("");
@@ -25,26 +28,59 @@ const Account = () => {
 	  }
 
 
-	  const SignupState = async (event) => {
-		event.preventDefault();
-		try {
-		  const payload = {
-			email:email,
-			password:password,
-			nickname:nickname
-		  }
-		  let res = await instanceAxios.post(`/api/auth/sign-up`, payload)
-		  if(res.data.status >= 300){
-			alert(res.data.message)
-			return;
-		  }
-		  console.log(res)
-		  initTextFiled();
+	//   const SignupState = async (event) => {
+	// 	event.preventDefault();
+	// 	try {
+	// 	  const payload = {
+	// 		email:email,
+	// 		password:password,
+	// 		nickname:nickname
+	// 	  }
+	// 	  let res = await instanceAxios.post(`/api/auth/sign-up`, payload)
+	// 	  if(res.data.status >= 300){
+	// 		alert(res.data.message)
+	// 		return;
+	// 	  }
+	// 	  console.log(res)
+	// 	  initTextFiled();
 
-		  } catch (error) {
+	// 	  } catch (error) {
+	// 		console.log(error)
+	// 	  }
+	//   }
+
+
+// ------------------------- 리액트 쿼리로 리팩토링-------------------------------
+
+	const mutation = useMutation(async (payload) => {
+		const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/api/auth/sign-up`, payload)
+		return response.data;
+	  })
+
+
+	  const handleSubmit = async (event) =>{
+		event.preventDefault();
+		try{
+			const payload = {
+				email:email,
+				password:password,
+				nickname:nickname
+			}
+
+			const res = await mutation.mutateAsync(payload)
+			console.log(res)
+			if(res.data.status >= 300){
+				alert(res.data.message)
+				return
+			}
+			console.log(res)
+			initTextFiled();
+		}catch (error) {
 			console.log(error)
-		  }
+		}
 	  }
+
+// ------------------------- 리액트 쿼리로 리팩토링-------------------------------
 
 	  const inputEmailHandler = (event) => {
 		setEmail(event.target.value);
@@ -183,7 +219,7 @@ const Account = () => {
 			  fullWidth
 			  variant="contained"
 			  sx={{ mt: 1, mb: 3 }}
-			  onClick={SignupState}
+			  onClick={handleSubmit}
 			  >회원가입하기</AccountButton>
           </div>
           <FooterContainer>
