@@ -18,7 +18,6 @@ const Account = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [nickname, setNickname] = useState("");
-  const [ErrorMessage, setErrorMessage] = useState("");
 
   const initTextFiled = () => {
     setEmail("");

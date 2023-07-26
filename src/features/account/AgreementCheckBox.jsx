@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { styled } from "styled-components";
 
 const AgreementCheckBox = () => {
-  const [isChecked, setIsChecked] = useState(false);
+  // const [isChecked, setIsChecked] = useState(false);
 
-  const OnclickCheckInput = () => {
-    // 리렌더가 일어나면 지금 값이 가리키는 참조값이랑 렌더링 후 참조값이 다르기때문에 이전꺼에서 반대로해줘가 안전.
-    setIsChecked((prev) => !prev);
-  };
+  // const OnclickCheckInput = () => {
+  //   // 리렌더가 일어나면 지금 값이 가리키는 참조값이랑 렌더링 후 참조값이 다르기때문에 이전꺼에서 반대로해줘가 안전.
+  //   setIsChecked((prev) => !prev);
+  // };
   return (
     <div>
       <LabelName>약관동의</LabelName>
@@ -24,8 +24,8 @@ const AgreementCheckBox = () => {
           <AgreeItemsContainer>
             <CheckInput
               type="checkbox"
-              checked={isChecked}
-              onChange={OnclickCheckInput}
+              // checked={isChecked}
+              // onChange={OnclickCheckInput}
             />
             <PlusContents>
               만 14세 이상입니다
