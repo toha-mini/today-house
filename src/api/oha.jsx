@@ -17,6 +17,7 @@ function getCookie(cookieName) {
 	return cookieValue;
 }
 
+
 //! Get Post
 const getPhotoLists = async () => {
 	console.log(process.env.REACT_APP_SERVER_URL);
@@ -63,4 +64,6 @@ const postBookMarkLists = async ({ id }) => {
 	}
 };
 
-export { getPhotoLists, postBookMarkLists };
+
+
+export { getPhotoLists, postBookMarkLists};

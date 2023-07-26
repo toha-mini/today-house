@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { styled } from 'styled-components'
 import { AiOutlineHeart } from 'react-icons/ai';
 import { AiFillHeart } from 'react-icons/ai';
+import formatTimeAgo from '../time';
 
-export const Comment = (id) => {
+
+export const Comment = ({commentData, id, nickname, content ,username,createdAt}) => {
 
     const [isFilledHeart, setIsFilledHeart] = useState(false)
     const [isLiked, setIsLiked] = useState(false);
@@ -11,13 +13,14 @@ export const Comment = (id) => {
 
 
     const handleHeartClick = () => {
+        console.log(commentData)
         setIsFilledHeart(!isFilledHeart)
         setIsLiked((prevState) => !prevState);
         setLikeCount((prevCount) => (isLiked ? prevCount - 1 : prevCount + 1));
     }
 
-
-
+   
+    const formattedCreatedDate = formatTimeAgo(createdAt);
 
 
   return (
@@ -31,14 +34,16 @@ export const Comment = (id) => {
             <CommentAll>
                 <CommentNameDiv>
                     <CommentName>
-                        Royce Kim
+                    {content}
                     </CommentName>
                 </CommentNameDiv>
                 <CommentTitle>
-                    정말 깔끔하네요
+                     {nickname}
                 </CommentTitle>
                 <CommentDiv>
-                        <CommentMonth>4개월전</CommentMonth>
+                        <CommentMonth>
+                            {formattedCreatedDate}
+                        </CommentMonth>
                         <LikeFlex>
                             <Comma>.</Comma>
                             <LikeButton>
@@ -231,3 +236,4 @@ const LikeButton = styled.button`
     font-weight: 500;
     letter-spacing: -0.3px;
 `
+export default Comment;

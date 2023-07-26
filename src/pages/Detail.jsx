@@ -7,10 +7,10 @@ import { FaBookmark } from 'react-icons/fa';
 import { SlBubble } from 'react-icons/sl';
 import { FiShare2 } from 'react-icons/fi';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import { instance } from '../api/oha';
-
+import { instance,  } from '../api/oha';
+import Comment from './Comment';
 
 function getCookie(cookieName){
     var cookieValue=null;
@@ -24,21 +24,6 @@ function getCookie(cookieName){
     return cookieValue;
 
   }
-  
-// function getCookie(cookieName) {
-//     var cookieValue = null;
-//     if (document.cookie) {
-//       var cookies = document.cookie.split(';');
-//       for (var i = 0; i < cookies.length; i++) {
-//         var cookie = cookies[i].trim();
-//         if (cookie.indexOf(encodeURIComponent(cookieName) + '=') === 0) {
-//           cookieValue = decodeURIComponent(cookie.substring(cookieName.length + 1));
-//           break;
-//         }
-//       }
-//     }
-//     return cookieValue;
-//   }
 
 export const Detail = () => {
 
@@ -55,19 +40,92 @@ export const Detail = () => {
         setIsFilledBook(!isFilledBook)
     }
 
-
-        const [isEmpty, setIsEmpty] = useState(true);
-        
-        const handleChange = (e) => {
-          setIsEmpty(e.target.textContent === '');
+// --------------------좋아요 기능-----------------------
+    const accessToken = getCookie("accessToken");
+    const queryClient = useQueryClient();
+    const likeMutation = useMutation((payload) =>
+        axios.post(`${process.env.REACT_APP_SERVER_URL}/api/like`, payload, {
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: '*/*',
+            Authorization: `${accessToken}`,
+          },
+        }),
+      {
+        onError: (error) => {
+          console.log('좋아요 처리 실패', error);
+        },
+      }
+    );
+    
+    const handleLikeButton = async () => {
+      try {
+        const payload = {
+          postId: id,
         };
+    
+        // 좋아요 버튼의 상태를 변경
+        setIsLiked((prevState) => !prevState);
+    
+        // 서버로 좋아요 요청 보내기
+        await likeMutation.mutateAsync(payload);
+      } catch (error) {
+        console.log('좋아요 처리 실패', error);
+      }
+    };
+
+// --------------------좋아요 기능-----------------------
+
+// -----------------------댓글 추가 기능----------------------------
+
+const addCommentMutation = useMutation(
+    (commentText) =>
+      instance.post(
+        `/api/comments`,
+        {
+          postId: id,
+          content: commentText,
+        },
+        {
+          headers: {
+            Accept: '*/*',
+            Authorization: `${accessToken}`,
+          },
+        }
+      ),
+    {
+      onError: (error) => {
+        console.log('댓글 작성 실패', error);
+      },
+
+      onSettled: () => {
+        queryClient.invalidateQueries('comments');
+      },
+    }
+  );
+
+
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await addCommentMutation.mutateAsync(commentText);
+      
+
+      setCommentText('');
+    } catch (error) {
+      console.log('댓글 작성 실패', error);
+    }
+  };
+  // -----------------------댓글 추가 기능----------------------------
+
+
 // -----------------------게시글 ID 조회----------------------------
     // 게시글 ID 조회
     const {id} = useParams();
 
     // 게시글 데이터
     const { data: cardData, isLoading, isError, } = useQuery(['card', id], () =>
-        axios.get(`${process.env.REACT_APP_SERVER_URL}/api/posts/${id}`).then((res) => res.data)
+         axios.get(`${process.env.REACT_APP_SERVER_URL}/api/posts/${id}`).then((res) => res.data)
     );
 
     const { data: commentData, isLoading: isCommentLoading, isError: isCommentError } = useQuery(
@@ -75,7 +133,8 @@ export const Detail = () => {
         () => axios.get(`${process.env.REACT_APP_SERVER_URL}/api/comments/post/${id}`).then((res) => res.data)
       );
 
-console.log(cardData)
+    console.log(cardData)
+    console.log(commentData)
     // 데이터를 불러오기 전에 로딩 상태를 보여줍니다.
     if (isLoading) {
         return <div>Loading...</div>;
@@ -85,69 +144,6 @@ console.log(cardData)
         return <div>Error fetching card data...</div>;
     }
 // -----------------------게시글 ID 조회----------------------------
-
-// -----------------------좋아요 기능----------------------------
- const handleLikeButton = async () => {
-    try {
-        const accessToken = getCookie("accessToken");
-        console.log(accessToken);
-        const payload = {
-            postId:`${id}`,
-            
-        }
-        await axios.post(
-            `${process.env.REACT_APP_SERVER_URL}/api/like`,
-            payload,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    Accept: "*/*",
-                    Authorization: `${accessToken}`,
-                },
-            }
-            );
-            // 좋아요 버튼 상태 변경
-            setIsLiked((prevState) => !prevState);
-           
-        
-    } catch (error) {
-        console.log('좋아요 처리 실패', error);
-    }
-};
-// -----------------------좋아요 기능----------------------------
-
-
-// -----------------------댓글 추가 기능----------------------------
-
-   // 댓글 추가 기능
-   const handleCommentSubmit = async (e) => {
-    e.preventDefault();
-    try {
-        // 댓글 작성 요청
-        const accessToken = getCookie("accessToken");
-        console.log(accessToken);
-        await instance.post(
-            `/api/comments`,
-            {
-                postId: id,
-                content: commentText
-            },
-            {
-                headers: {
-                    Accept: "*/*",
-                    Authorization: `${accessToken}`,
-                },
-            }
-        )
-
-        // 댓글 작성 후 폼 초기화
-        setCommentText('');
-    } catch (error) {
-        console.log('댓글 작성 실패', error);
-    }
-}
-
-// -----------------------댓글 추가 기능----------------------------
 
 
 
@@ -196,15 +192,13 @@ console.log(cardData)
                                         <CommentButDiv3>
                                             <CommentButDiv2>
                                                 <CommentLine 
-                                                type='text'
-                                                value={commentText}
-                                                onChange={(e) => setCommentText(e.target.value)}
-                                                contenteditable="true" 
-                                                placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다:)" 
-                                                size='44' 
-                                                isEmpty={isEmpty} 
-                                                onInput={handleChange}>
-
+                                                    type='text'
+                                                    value={commentText}
+                                                    onChange={(e) => setCommentText(e.target.value)}
+                                                    contenteditable="true" 
+                                                    placeholder="칭찬과 격려의 댓글은 작성자에게 큰 힘이 됩니다:)" 
+                                                    size='44' 
+                                                    >
                                                 </CommentLine>
                                                 <CommentButDiv>
                                                     <CommentBtn onClick={handleCommentSubmit}>
@@ -217,14 +211,14 @@ console.log(cardData)
                                 </CommentButDiv5>
                             </CommentButDiv6>
                             <div>
-                                    {cardData.commentList && cardData.commentList.map((comment) => (
-                                    <Comment 
-                                        key={comment.commentId}
-                                        id={comment.commentId}
-                                        content={comment.content} 
-                                        username={comment.username}
-                                        userIdenticonUrl={comment.userIdenticonUrl}
-                                        onDelete={() => handleCommentDelete(comment.commentId)}
+                                
+                                    {commentData.commentList?.map((commentData) => (
+                                    <Comment
+                                        key={commentData.commentId}
+                                        id={commentData.commentId}
+                                        content={commentData.content} 
+                                        nickname={commentData.nickname}
+                                        createdAt={commentData.createdAt}
                                     />
                                 ))}
                             </div>
@@ -241,8 +235,6 @@ console.log(cardData)
                                     <SideButtonSpan onClick={handleLikeButton}>
                                         <SideButtonHeart >
                                         {isLiked ? <AiFillHeart  color = "#43C5F0"size={23}/> : <AiOutlineHeart  size={23}/>}
-                                            
-
                                         </SideButtonHeart>
                                     </SideButtonSpan>
                                     <SideButtonSpanNumber>
@@ -254,8 +246,6 @@ console.log(cardData)
                                     <SideButtonSpan onClick={handleBookClick}>
                                         <SideButtonHeart>
                                         {isFilledBook ? <FaBookmark  color = "#43C5F0"size={23}/> : <FaRegBookmark  size={23}/>}
-                                          
-
                                         </SideButtonHeart>
                                     </SideButtonSpan>
                                     <SideButtonSpanNumber>
