@@ -4,15 +4,12 @@ import camera from "../../imgs/camera.png";
 import styled from "styled-components";
 
 const DropZone = ({ setTitleImage, titleImage }) => {
-  console.log("악", titleImage);
-
   useEffect(() => {
     setTitleImage(titleImage);
   }, [titleImage]);
 
   const onDrop = (acceptedFiles) => {
     setTitleImage(acceptedFiles);
-    console.log("acceptedFiles", acceptedFiles);
   };
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
