@@ -9,20 +9,22 @@ import menu_2 from "../module/homeMenuSlice_2";
 import shopping_1 from "../module/shoppingSlice_1";
 import photoSlice from "../module/photoSlice";
 import interiorSlice from "../module/interiorSlice";
+import userSlice from "../module/user";
 
 const store = configureStore({
-  reducer: {
-    cardSlice,
-    menu_1,
-    menu_2,
-    selectedSlice_1,
-    selectedSlice_2,
-    selectedSlice_3,
-    selectedSlice_4,
-    shopping_1,
-    photoSlice,
-    interiorSlice,
-  },
+	reducer: {
+		cardSlice,
+		menu_1,
+		menu_2,
+		selectedSlice_1,
+		selectedSlice_2,
+		selectedSlice_3,
+		selectedSlice_4,
+		shopping_1,
+		photoSlice,
+		interiorSlice,
+		userSlice,
+	},
 });
 
 export default store;

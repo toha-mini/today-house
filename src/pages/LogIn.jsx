@@ -2,30 +2,33 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import Card from "react-bootstrap/Card";
 import { useMutation } from "@tanstack/react-query";
-import { instance, logIn } from "../api/oha";
 import { useNavigate } from "react-router-dom";
+import { logInSite } from "../api/oha";
+import { useDispatch } from "react-redux";
+import { logIn } from "../redux/action/user";
 
 const LogIn = () => {
-  const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 
-  const mutation = useMutation(logIn);
+	const mutation = useMutation(logInSite, {
+		onSuccess: (data) => {
+			dispatch(logIn(data));
+			console.log("login", data);
+		},
+	});
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const logInfo = {
-      email: email,
-      password: password,
-    };
-    mutation.mutate(logInfo);
-  };
+	const handleSubmit = async (event) => {
+		event.preventDefault();
+		const logInfo = {
+			email: email,
+			password: password,
+		};
+		mutation.mutate(logInfo);
+	};
 
-  // const mutation = useMutation(async (payload) => {
-  // 	const response = await instance.post(`/api/auth/login`, payload);
-  // 	document.cookie = `accessToken=${response.headers.auth}; path=/;`;
-  // 	return response.data;
-  // });
 
   // const handleSubmit = async (event) => {
   // 	event.preventDefault();

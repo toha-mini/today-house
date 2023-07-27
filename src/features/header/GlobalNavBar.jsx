@@ -5,14 +5,29 @@ import styled from "styled-components";
 import PostModal from "./PostModal";
 import { useNavigate } from "react-router-dom";
 import { PiBellLight } from "react-icons/pi";
-import { LiaBookmarkSolid } from "react-icons/lia";
 import { FaBookmark } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { getCookie, logOut } from "../../api/oha";
 
 const GlobalNavBar = () => {
+	const dispatch = useDispatch;
 	const navigate = useNavigate();
 	const [selected, setSelected] = useState(null);
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+	useEffect(() => {
+		// 쿠키를 가져오기
+		let cookie = getCookie("accessToken");
+		// 확인
+		console.log(cookie);
+		// 쿠키가 있으면?
+		if (cookie) {
+			setIsLoggedIn(true);
+		} else {
+			setIsLoggedIn(false);
+		}
+	}, []);
+	console.log(isLoggedIn);
 	const moveHome = () => {
 		navigate("/");
 	};
@@ -24,6 +39,11 @@ const GlobalNavBar = () => {
 	const handleLogin = () => {
 		setIsLoggedIn(true);
 		navigate("/login");
+	};
+
+	const handleLogout = () => {
+		logOut();
+		setIsLoggedIn(false);
 	};
 
 	return (
@@ -77,6 +97,7 @@ const GlobalNavBar = () => {
 									<GlobalNav2>
 										<GlobalNavCart src={cart} />
 									</GlobalNav2>
+									<GlobalNav2 onClick={handleLogout}>로그아웃</GlobalNav2>
 								</StGlobalNavContainer>
 							</>
 						)}

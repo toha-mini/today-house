@@ -75,6 +75,20 @@ const HomePicturePost = () => {
 
   // 서버로 전송 formData
 
+
+	const contentsChange = (event) => {
+		setContents(event.target.value);
+	};
+
+	const handleSubmit = async () => {
+		const Data = new FormData();
+		const content = { content: contents };
+		Data.append("content", new Blob([JSON.stringify(content)], { type: "application/json" }));
+		console.log("이미지", titleImage);
+		// if (titleImage) {
+		//   Data.append("titleImage", titleImage);
+		// }
+
   const isJsonString = (str) => {
     try {
       JSON.parse(str);
@@ -83,6 +97,7 @@ const HomePicturePost = () => {
     }
     return true;
   };
+
 
   const handleSubmit = async () => {
     const Data = new FormData();
@@ -149,9 +164,6 @@ const HomePicturePost = () => {
   const moveHome = () => {
     navigate("/");
   };
-
-  // ------------------  ------------------  ------------------  ------------------  ------------------  ------------------
-  // ------------------  ------------------  ------------------  ------------------  ------------------  ------------------
 
   return (
     <PageContainer>
