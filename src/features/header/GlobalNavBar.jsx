@@ -16,11 +16,8 @@ const GlobalNavBar = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 
 	useEffect(() => {
-		// 쿠키를 가져오기
 		let cookie = getCookie("accessToken");
-		// 확인
 		console.log(cookie);
-		// 쿠키가 있으면?
 		if (cookie) {
 			setIsLoggedIn(true);
 		} else {
