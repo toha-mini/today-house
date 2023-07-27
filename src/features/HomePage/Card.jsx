@@ -17,7 +17,7 @@ const Card = ({ size, card, title, subtitle, more, src }) => {
 	}, [currentImgOrder]);
 
 	const moveToNextSlide = () => {
-		if (currentImgOrder === 1) return;
+		if (currentImgOrder === 10) return;
 		setCurrentImgOrder(currentImgOrder + 1);
 	};
 
