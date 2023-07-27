@@ -456,7 +456,7 @@ const ReImage = styled.img`
   height: 50px;
 `;
 const AccountButton = styled.button`
-  margin-top: 30px;
+  margin-top: 10px;
   background-color: #35c5f0;
   border: 1px solid transparent;
   border-color: #35c5f0;
