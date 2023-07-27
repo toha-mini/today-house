@@ -28,21 +28,11 @@ const HomePicturePost = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [titleImage, setTitleImage] = useState([]);
 	const [contents, setContents] = useState("");
+	const [menu, setMenu] = useState("공간정보추가");
 	console.log(titleImage);
 	const OnclickModalOpen = () => {
 		setIsOpen(!isOpen);
 	};
-
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [titleImage, setTitleImage] = useState([]);
-  const [contents, setContents] = useState("");
-  const [menu, setMenu] = useState("공간정보추가");
-  console.log(titleImage);
-  const OnclickModalOpen = () => {
-    setIsOpen(!isOpen);
-  };
-
 
 	// const onClickUpload = async (event) => {
 	//   event.preventDefault();
@@ -87,6 +77,10 @@ const HomePicturePost = () => {
 			return false;
 		}
 		return true;
+	};
+
+	const contentsChange = (event) => {
+		setContents(event.target.value);
 	};
 
 	const handleSubmit = async () => {
@@ -155,52 +149,40 @@ const HomePicturePost = () => {
 	// ------------------  ------------------  ------------------  ------------------  ------------------  ------------------
 	// ------------------  ------------------  ------------------  ------------------  ------------------  ------------------
 
-
-  return (
-    <PageContainer>
-      <NavbarContainer>
-        <HeaderContainer>
-          <Logo src={postlogo} alt="postlogo" />
-          <UploadButton onClick={handleSubmit}>올리기</UploadButton>
-        </HeaderContainer>
-      </NavbarContainer>
-      <SubHeaderContainer>
-        <PictureButton>사진</PictureButton>
-      </SubHeaderContainer>
-      <MainContainer>
-        {/* 컴포넌트 분리 */}
-        <ImageUpload setTitleImage={setTitleImage} titleImage={titleImage} />
-        <ContentsUploadContainer>
-          <Contents>
-            <ContentTextArea
-              type="text"
-              value={contents}
-              onChange={contentsChange}
-              placeholder="어떤 사진인지 짧은 소개로 시작해보세요.&#13;&#10;다양한 #태그도 추가할 수 있어요."
-            />
-          </Contents>
-          <div>
-            <SpaceInfo
-              onClick={OnclickModalOpen}
-              setIsOpen={setIsOpen}
-              isOpen={isOpen}
-            >
-              {menu}
-              <BiSolidDownArrow style={{ marginLeft: "300px" }} />
-            </SpaceInfo>
-          </div>
-          {isOpen && (
-            <SpaceInofoModal
-              setIsOpen={setIsOpen}
-              isOpen={isOpen}
-              setMenu={setMenu}
-            />
-          )}
-        </ContentsUploadContainer>
-      </MainContainer>
-    </PageContainer>
-  );
-
+	return (
+		<PageContainer>
+			<NavbarContainer>
+				<HeaderContainer>
+					<Logo src={postlogo} alt='postlogo' />
+					<UploadButton onClick={handleSubmit}>올리기</UploadButton>
+				</HeaderContainer>
+			</NavbarContainer>
+			<SubHeaderContainer>
+				<PictureButton>사진</PictureButton>
+			</SubHeaderContainer>
+			<MainContainer>
+				{/* 컴포넌트 분리 */}
+				<ImageUpload setTitleImage={setTitleImage} titleImage={titleImage} />
+				<ContentsUploadContainer>
+					<Contents>
+						<ContentTextArea
+							type='text'
+							value={contents}
+							onChange={contentsChange}
+							placeholder='어떤 사진인지 짧은 소개로 시작해보세요.&#13;&#10;다양한 #태그도 추가할 수 있어요.'
+						/>
+					</Contents>
+					<div>
+						<SpaceInfo onClick={OnclickModalOpen} setIsOpen={setIsOpen} isOpen={isOpen}>
+							{menu}
+							<BiSolidDownArrow style={{ marginLeft: "300px" }} />
+						</SpaceInfo>
+					</div>
+					{isOpen && <SpaceInofoModal setIsOpen={setIsOpen} isOpen={isOpen} setMenu={setMenu} />}
+				</ContentsUploadContainer>
+			</MainContainer>
+		</PageContainer>
+	);
 };
 const PageContainer = styled.div`
 	height: 100%;

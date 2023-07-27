@@ -22,15 +22,13 @@ const getPhotoLists = async () => {
 	try {
 		const authorizationCookie = getCookie("accessToken");
 		console.log("authorization token: ", authorizationCookie);
-		const response = await instance.get(`/api/posts`, 
-		{
+		const response = await instance.get(`/api/posts`, {
 			headers: {
 				"Content-Type": "application/json",
 				Accept: "*/*",
 				Authorization: authorizationCookie,
 			},
-		}
-		);
+		});
 		console.log("response: ", response);
 		console.log(response.data.map((e) => e.isScrap));
 		return response.data;
@@ -63,7 +61,7 @@ const postBookMarkLists = async ({ id }) => {
 };
 
 //! login
-const logIn = async (payload) => {
+const logInSite = async (payload) => {
 	console.log(payload);
 	try {
 		const response = await instance.post(`/api/auth/login`, payload, {});
@@ -75,4 +73,9 @@ const logIn = async (payload) => {
 	}
 };
 
-export { instance, getPhotoLists, postBookMarkLists, logIn };
+//! logOut
+const logOut = () => {
+	document.cookie = "accessToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+};
+
+export { instance, getCookie, getPhotoLists, postBookMarkLists, logInSite, logOut };
