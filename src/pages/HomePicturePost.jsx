@@ -84,6 +84,7 @@ const HomePicturePost = () => {
       // 데이터 전송 성공 후 작업
       console.log("데이터 전송 성공");
       console.log(res);
+      moveHome();
 
       return res;
     } catch (error) {
