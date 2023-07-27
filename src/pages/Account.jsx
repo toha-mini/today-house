@@ -18,6 +18,12 @@ const Account = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [nickname, setNickname] = useState("");
+  const [isEmailAvailable, setIsEmailAvailable] = useState(false);
+  const [checkAge, setCheckAge] = useState(false);
+  const [checkTerms, setCheckTerms] = useState(false);
+  const [checkPersonalInfo, setCheckPersonalInfo] = useState(false);
+  const [checkMarketing, setCheckMarketing] = useState(false);
+  const [checkNotification, setCheckNotification] = useState(false);
 
   const initTextFiled = () => {
     setEmail("");
@@ -55,6 +61,14 @@ const Account = () => {
     return response.data;
   });
 
+  const emailCheckMutation = useMutation(async (payload) => {
+    const response = await axios.post(
+      `${process.env.REACT_APP_SERVER_URL}/api/auth/email`,
+      payload
+    );
+    return response.data;
+  });
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -62,6 +76,11 @@ const Account = () => {
         email: email,
         password: password,
         nickname: nickname,
+        checkAge: true,
+        checkTerms: true,
+        checkPersonalInfo: true,
+        checkPersonalMarketing: true,
+        checkPushNotification: true,
       };
 
       const res = await mutation.mutateAsync(payload);
@@ -72,6 +91,26 @@ const Account = () => {
       }
       console.log(res);
       initTextFiled();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const onClickCheckEmail = async (event) => {
+    event.preventDefault();
+    try {
+      const payload = {
+        email: email,
+      };
+
+      const res = await emailCheckMutation.mutateAsync(payload);
+      console.log(res);
+      if (res.checkValidate !== false) {
+        alert("사용가능한 이메일입니다.");
+        return;
+      } else {
+        alert("중복된 이메일입니다.");
+        return;
+      }
     } catch (error) {
       console.log(error);
     }
@@ -95,6 +134,7 @@ const Account = () => {
   const onClickSocial = () => {
     alert("현재 준비중입니다!");
   };
+
   return (
     <AccountPageContainer>
       <LogoContainerTitle>
@@ -155,8 +195,14 @@ const Account = () => {
           </EmailSelect>
           <EmailCheckContents>필수입력항목입니다.</EmailCheckContents>
           <div>
-            <EmailCheckButton>이메일 인증하기</EmailCheckButton>
-            <EmailCheckContents>중복된 이메일입니다.</EmailCheckContents>
+            <EmailCheckButton
+              onClick={onClickCheckEmail}
+              isEmailAvailable={isEmailAvailable}
+              setIsEmailAvailable={setIsEmailAvailable}
+            >
+              이메일 인증하기
+            </EmailCheckButton>
+            {/* <EmailCheckContents>중복된 이메일입니다.</EmailCheckContents> */}
           </div>
           <LabelName>비밀번호</LabelName>
 
@@ -212,7 +258,18 @@ const Account = () => {
             fullWidth
           />
           <EmailCheckContents>사용 중인 별명입니다.</EmailCheckContents>
-          <AgreementCheckBox />
+          <AgreementCheckBox
+            checkAge={checkAge}
+            setCheckAge={setCheckAge}
+            checkTerms={checkTerms}
+            setCheckTerms={setCheckTerms}
+            checkPersonalInfo={checkPersonalInfo}
+            setCheckPersonalInfo={setCheckPersonalInfo}
+            checkMarketing={checkMarketing}
+            setCheckMarketing={setCheckMarketing}
+            checkNotification={checkNotification}
+            setCheckNotification={setCheckNotification}
+          />
           <div>
             <AccountButton
               type="submit"
@@ -345,6 +402,7 @@ const EmailCheckContents = styled.div`
   margin-bottom: 10px;
 `;
 const EmailCheckButton = styled.div`
+  cursor: pointer;
   width: 360px;
   height: 50px;
   margin-top: 10px;

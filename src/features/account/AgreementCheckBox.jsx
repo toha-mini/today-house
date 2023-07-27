@@ -1,13 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { styled } from "styled-components";
 
-const AgreementCheckBox = () => {
-  // const [isChecked, setIsChecked] = useState(false);
+const AgreementCheckBox = ({
+  checkAge,
+  setCheckAge,
+  checkTerms,
+  setCheckTerms,
+  checkPersonalInfo,
+  setCheckPersonalInfo,
+  checkMarketing,
+  setCheckMarketing,
+  checkNotification,
+  setCheckNotification,
+}) => {
+  const OnclickCheckAge = () => {
+    // 리렌더가 일어나면 지금 값이 가리키는 참조값이랑 렌더링 후 참조값이 다르기때문에 이전꺼에서 반대로해줘가 안전.
+    setCheckAge((prev) => !prev);
+  };
 
-  // const OnclickCheckInput = () => {
-  //   // 리렌더가 일어나면 지금 값이 가리키는 참조값이랑 렌더링 후 참조값이 다르기때문에 이전꺼에서 반대로해줘가 안전.
-  //   setIsChecked((prev) => !prev);
-  // };
+  const onClickCheckTerms = () => {
+    setCheckTerms((prev) => !prev);
+  };
+
+  const onClickCheckPersonal = () => {
+    setCheckPersonalInfo((prev) => !prev);
+  };
+
+  const onClickCheckMarketing = () => {
+    setCheckMarketing((prev) => !prev);
+  };
+
+  const onClickCheckNotification = () => {
+    setCheckNotification((prev) => !prev);
+  };
   return (
     <div>
       <LabelName>약관동의</LabelName>
@@ -24,8 +49,9 @@ const AgreementCheckBox = () => {
           <AgreeItemsContainer>
             <CheckInput
               type="checkbox"
-              // checked={isChecked}
-              // onChange={OnclickCheckInput}
+              setCheckAge={setCheckAge}
+              value={checkAge}
+              onChange={OnclickCheckAge}
             />
             <PlusContents>
               만 14세 이상입니다
@@ -33,28 +59,48 @@ const AgreementCheckBox = () => {
             </PlusContents>
           </AgreeItemsContainer>
           <AgreeItemsContainer>
-            <CheckInput type="checkbox" />
+            <CheckInput
+              type="checkbox"
+              value={checkTerms}
+              setCheckTerms={setCheckTerms}
+              onChange={onClickCheckTerms}
+            />
             <PlusContents>
               이용약관
               <Essential>(필수)</Essential>
             </PlusContents>
           </AgreeItemsContainer>
           <AgreeItemsContainer>
-            <CheckInput type="checkbox" />
+            <CheckInput
+              type="checkbox"
+              value={checkPersonalInfo}
+              setCheckPersonalInfo={setCheckPersonalInfo}
+              onChange={onClickCheckPersonal}
+            />
             <PlusContents>
               개인정보수집 및 이용동의
               <Essential>(필수)</Essential>
             </PlusContents>
           </AgreeItemsContainer>
           <AgreeItemsContainer>
-            <CheckInput type="checkbox" />
+            <CheckInput
+              type="checkbox"
+              value={checkMarketing}
+              setCheckMarketing={setCheckMarketing}
+              onChange={onClickCheckMarketing}
+            />
             <PlusContents>
               개인정보 마케팅 활용 동의
               <Select>(선택)</Select>
             </PlusContents>
           </AgreeItemsContainer>
           <AgreeItemsContainer>
-            <CheckInput type="checkbox" />
+            <CheckInput
+              type="checkbox"
+              value={checkNotification}
+              setCheckNotification={setCheckNotification}
+              onChange={onClickCheckNotification}
+            />
             <PlusContents>
               이벤트, 쿠폰, 특가 알림 메일 및 SMS 등 수신
               <Select>(선택)</Select>
@@ -91,22 +137,17 @@ const AreeTitleContainer = styled.div`
   display: flex;
   align-items: center;
 `;
+
+// const CheckInput1 = styled.input`
+//   accent-color: red;
+// `;
 const CheckInput = styled.input`
-  appearance: none;
   border: 1px solid #2f3438;
   border-radius: 4px;
   width: 18px;
   height: 18px;
   margin-right: 5px;
-
-  &:checked {
-    border-color: transparent;
-    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M5.707 7.293a1 1 0 0 0-1.414 1.414l2 2a1 1 0 0 0 1.414 0l4-4a1 1 0 0 0-1.414-1.414L7 8.586 5.707 7.293z'/%3e%3c/svg%3e");
-    background-size: 100% 100%;
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-color: #35c5f0;
-  }
+  accent-color: rgb(53, 197, 240);
 `;
 
 const AgreeContents = styled.span`
