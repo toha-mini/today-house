@@ -20,13 +20,9 @@ function getCookie(cookieName) {
 }
 
 const HomePicturePost = () => {
-  // const instanceAxios = axios.create({
-  //   baseURL: process.env.REACT_APP_SERVER_URL,
-  //   // baseURL : "http://13.209.96.200:8080"
-  // });
+  const navigate = useNavigate();
 
   const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
   const [titleImage, setTitleImage] = useState([]);
   const [contents, setContents] = useState("");
   const [menu, setMenu] = useState("공간정보추가");
@@ -34,60 +30,9 @@ const HomePicturePost = () => {
   const OnclickModalOpen = () => {
     setIsOpen(!isOpen);
   };
-
   const contentsChange = (event) => {
     setContents(event.target.value);
   };
-
-  // const onClickUpload = async (event) => {
-  //   event.preventDefault();
-  //   // 폼 데이터 생성
-  //   const formData = new FormData();
-  //   const request = {
-  //     content: { content: "content1" },
-  //     titleImage: "titleImgFile",
-  //     subImage1: "subImg1File1",
-  //     subImage2: "subImg2File2",
-  //   };
-  //   console.log(request);
-  //   // 폼에 데이터를 첨부하기 위해서는 form.append('키값(필드)',데이터)를 이용한다.
-  //   formData.append(
-  //     "request",
-  //     new Blob([JSON.stringify(request)], { type: "application/json" })
-  //   );
-  //   //json형태로 변환
-  //   formData.append("image", selectedImages);
-
-  //   try {
-  //     const accessToken = getCookie("accessToken");
-  //     console.log(accessToken);
-  //     const res = await instance.post("/api/posts", formData, {
-  //       headers: {
-  //         "Content-Type": "multipart/formData",
-  //       },
-  //     });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // ------------------  ------------------  ------------------  ------------------  ------------------  ------------------
-  // ------------------  ------------------  ------------------  ------------------  ------------------  ------------------
-
-  // 서버로 전송 formData
-
-
-	const contentsChange = (event) => {
-		setContents(event.target.value);
-	};
-
-	const handleSubmit = async () => {
-		const Data = new FormData();
-		const content = { content: contents };
-		Data.append("content", new Blob([JSON.stringify(content)], { type: "application/json" }));
-		console.log("이미지", titleImage);
-		// if (titleImage) {
-		//   Data.append("titleImage", titleImage);
-		// }
 
   const isJsonString = (str) => {
     try {
@@ -98,7 +43,6 @@ const HomePicturePost = () => {
     return true;
   };
 
-
   const handleSubmit = async () => {
     const Data = new FormData();
     const content = { content: contents };
@@ -108,7 +52,7 @@ const HomePicturePost = () => {
     );
     console.log("이미지", titleImage);
     // if (titleImage) {
-    //   Data.append("titleImage", titleImage);
+    // Data.append("titleImage", titleImage);
     // }
 
     titleImage.forEach((file, index) => {
@@ -120,15 +64,6 @@ const HomePicturePost = () => {
         console.log("두번째 부터:", file);
       }
     });
-
-    // if (!isJsonString(JSON.stringify(content))) {
-    //   console.error("데이터가 올바른 JSON 형식이 아닙니다.");
-    //   return;
-    // }
-    // for (const key of Data.keys()) {
-    //   console.log("key = ", key);
-    //   console.log("value = ", Data.get(key));
-    // }
 
     try {
       const accessToken = getCookie("accessToken");
@@ -149,11 +84,7 @@ const HomePicturePost = () => {
       // 데이터 전송 성공 후 작업
       console.log("데이터 전송 성공");
       console.log(res);
-      // navigate("/");
-      // 쿼리 업데이트
-      // queryClient.invalidateQueries("posts");
-      // 작성 후 메인페이지로 이동
-      // navigate("/");
+
       return res;
     } catch (error) {
       // 데이터 전송 실패 처리
