@@ -1,16 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { styled } from 'styled-components'
 import { AiOutlineHeart } from 'react-icons/ai';
 import { AiFillHeart } from 'react-icons/ai';
 import { FaRegBookmark } from 'react-icons/fa';
 import { FaBookmark } from 'react-icons/fa';
 import { SlBubble } from 'react-icons/sl';
-import { FiShare2 } from 'react-icons/fi';
+import {  FiShare2 } from 'react-icons/fi';
 import { useParams } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { instance,  } from '../api/oha';
 import Comment from './Comment';
+import Layout from '../components/Layout';
+
 
 function getCookie(cookieName){
     var cookieValue=null;
@@ -41,6 +43,29 @@ export const Detail = () => {
     }
 
 // --------------------좋아요 기능-----------------------
+const fetchLikeStatus = async () => {
+	// 서버에서 가져오는 대신 로컬 스토리지에서 가져오도록 수정
+	const likeStatus = localStorage.getItem('likeStatus');
+	return likeStatus === 'true'; // 문자열을 불리언 값으로 변환
+  };
+  
+  useEffect(() => {
+	const getLikeStatus = async () => {
+	  try {
+		const likeStatus = await fetchLikeStatus();
+		setIsLiked(likeStatus);
+
+	  } catch (error) {
+		console.log('좋아요 상태 가져오기 실패', error);
+	  }
+	};
+  
+	getLikeStatus();
+  }, []);
+
+
+
+
     const accessToken = getCookie("accessToken");
     const queryClient = useQueryClient();
     const likeMutation = useMutation((payload) =>
@@ -55,6 +80,9 @@ export const Detail = () => {
         onError: (error) => {
           console.log('좋아요 처리 실패', error);
         },
+		onSuccess: () => {
+			queryClient.invalidateQueries('comments');
+		}
       }
     );
     
@@ -66,9 +94,10 @@ export const Detail = () => {
     
         // 좋아요 버튼의 상태를 변경
         setIsLiked((prevState) => !prevState);
-    
         // 서버로 좋아요 요청 보내기
         await likeMutation.mutateAsync(payload);
+		
+		 localStorage.setItem('likeStatus', !isLiked)
       } catch (error) {
         console.log('좋아요 처리 실패', error);
       }
@@ -149,6 +178,7 @@ const addCommentMutation = useMutation(
 
 
   return (
+	<Layout>
     <PicTotal>
         <PicPadding>
             <PicTop>
@@ -156,8 +186,8 @@ const addCommentMutation = useMutation(
                     <CardTop>
                         <DetailTag>
                            <DetailTagText>
-                                <TagTextButton>모던스타일</TagTextButton>
-                                <TagTextButton>아파트</TagTextButton>
+                                {/* <TagTextButton>모던스타일</TagTextButton>
+                                <TagTextButton>아파트</TagTextButton> */}
                             </DetailTagText> 
                         </DetailTag>
                         <CardPics>
@@ -211,7 +241,6 @@ const addCommentMutation = useMutation(
                                 </CommentButDiv5>
                             </CommentButDiv6>
                             <div>
-                                
                                     {commentData.commentList?.map((commentData) => (
                                     <Comment
                                         key={commentData.commentId}
@@ -232,9 +261,9 @@ const addCommentMutation = useMutation(
                         <SideButtonControl>
                             <SideButtonBox>
                                 <SideButton>
-                                    <SideButtonSpan onClick={handleLikeButton}>
+                                    <SideButtonSpan onClick={handleLikeButton} isLiked={isLiked}>
                                         <SideButtonHeart >
-                                        {isLiked ? <AiFillHeart  color = "#43C5F0"size={23}/> : <AiOutlineHeart  size={23}/>}
+                                        {isLiked ? <AiOutlineHeart  size={23}/> : <AiFillHeart  color = "#43C5F0"size={23}/>}
                                         </SideButtonHeart>
                                     </SideButtonSpan>
                                     <SideButtonSpanNumber>
@@ -282,6 +311,7 @@ const addCommentMutation = useMutation(
             </PicTop>
         </PicPadding>
     </PicTotal>
+	</Layout>
   ) 
 }
 

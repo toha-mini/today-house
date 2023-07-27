@@ -4,7 +4,6 @@ import camera from "../../imgs/camera.png";
 import styled from "styled-components";
 
 const DropZone = ({ setTitleImage, titleImage }) => {
-  // const [selectedImages, setSelectedImages] = useState("");
   console.log("악", titleImage);
 
   useEffect(() => {

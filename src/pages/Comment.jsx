@@ -22,6 +22,8 @@ export const Comment = ({commentData, id, nickname, content ,username,createdAt}
 
    
     const formattedCreatedDate = formatTimeAgo(createdAt);
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
 
 
   return (

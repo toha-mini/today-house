@@ -22,13 +22,15 @@ const getPhotoLists = async () => {
 	try {
 		const authorizationCookie = getCookie("accessToken");
 		console.log("authorization token: ", authorizationCookie);
-		const response = await instance.get(`/api/posts`, {
+		const response = await instance.get(`/api/posts`, 
+		{
 			headers: {
 				"Content-Type": "application/json",
 				Accept: "*/*",
 				Authorization: authorizationCookie,
 			},
-		});
+		}
+		);
 		console.log("response: ", response);
 		console.log(response.data.map((e) => e.isScrap));
 		return response.data;
