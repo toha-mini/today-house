@@ -107,6 +107,9 @@ const LogIn = () => {
             <LoginBtn
               style={{ backgroundColor: "#3F9EF2" }}
               variant="contained"
+              onClick={() => {
+                navigate("/");
+              }}
             >
               로그인
             </LoginBtn>
