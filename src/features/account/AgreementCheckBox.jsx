@@ -33,6 +33,7 @@ const AgreementCheckBox = ({
   const onClickCheckNotification = () => {
     setCheckNotification((prev) => !prev);
   };
+
   return (
     <div>
       <LabelName>약관동의</LabelName>
