@@ -5,7 +5,8 @@ import styled from "styled-components";
 import PostModal from "./PostModal";
 import { useNavigate } from "react-router-dom";
 import { PiBellLight } from "react-icons/pi";
-// import { LiaBookmarkSolid } from "react-icons/li";
+import { LiaBookmarkSolid } from "react-icons/lia";
+import { FaBookmark } from "react-icons/fa";
 
 const GlobalNavBar = () => {
 	const navigate = useNavigate();
@@ -62,17 +63,24 @@ const GlobalNavBar = () => {
 										<GlobalNav2 onClick={moveSign}>{"회원가입"}</GlobalNav2>
 										<GlobalNav2>{"고객센터"}</GlobalNav2>
 									</GlobalNavTag>
-									<PostModal />
 								</StGlobalNavContainer>
 							</>
 						) : (
 							<>
-								{/* <LiaBookmarkSolid /> */}
-								<PiBellLight size='28px' />
-								<GlobalNavCart src={cart} />
-								<PostModal />
+								<StGlobalNavContainer>
+									<GlobalNavCartWrap>
+										<FaBookmark size='30px' />
+									</GlobalNavCartWrap>
+									<GlobalNav2>
+										<PiBellLight size='28px' />
+									</GlobalNav2>
+									<GlobalNav2>
+										<GlobalNavCart src={cart} />
+									</GlobalNav2>
+								</StGlobalNavContainer>
 							</>
 						)}
+						<PostModal />
 					</StGlobalNav2>
 				</ContainerInner>
 			</GlobalNavBarContainer>

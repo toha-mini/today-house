@@ -1,55 +1,46 @@
-import React, { useState, useEffect, useCallback } from "react";
-import styled from "styled-components";
 import profile from "../../imgs/default_profile.png";
 import BookMark from "./BookMark";
 import BookMarkOn from "./BookMarkOn";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { postBookMarkLists } from "../../api/oha";
+import { useEffect, useState } from "react";
+import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 const CardSmall = ({ card = [], title, subtitle, more, src }) => {
-	// const { data: bookmarkdata } = useQuery(["bookmark"], getBookMarkLists, {
-	// 	refetchOnWindowFocus: true,
-	// 	staleTime: 360 * 1000, // 1분
-	// });
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
-
 	const mutation = useMutation(postBookMarkLists, {
-		onMutate: ({ id, index }) => {
-			return { index };
-		},
-		onSuccess: (bookmarkdata, variables, context) => {
-			// console.log(context);
-			// const newOnScrap = [...onScrap];
-			// newOnScrap[context.index] = !newOnScrap[context.index];
-			// setOnScrap(newOnScrap);
-			// queryClient.invalidateQueries(["bookmark"]);
+		onSuccess: (bookmarkdata) => {
+			queryClient.invalidateQueries(["bookmark"]);
 		},
 	});
+
+	// 로컬 스토리지에서 이전 상태를 불러옵니다.
+	const [onScrap, setOnScrap] = useState(() => {
+		const savedState = localStorage.getItem("onScrap");
+		return savedState ? JSON.parse(savedState) : Array(card.length).fill(false);
+	});
+
+	const bookMarkControlHandler = (event, index) => {
+		event.stopPropagation();
+		const newOnScrap = [...onScrap];
+		newOnScrap[index] = !newOnScrap[index];
+		setOnScrap(newOnScrap);
+
+		mutation.mutate({ id: card[index].postId });
+		console.log({ id: card[index].postId });
+	};
 
 	const moveDetailButtonHandler = (id) => {
 		console.log(id);
 		navigate(`/detail/${id}`);
 	};
 
-	const [onScrap, setOnScrap] = useState(Array(card.length).fill(false));
-
-	const bookMarkControlHandler = async (index) => {
-		try {
-			const res = await mutation.mutateAsync({ id: card[index].postId, index });
-			console.log(res.isScrap);
-			const newOnScrap = [...onScrap];
-			newOnScrap[index] = res.scrap;
-			setOnScrap(newOnScrap);
-		} catch (error) {
-			console.error(error);
-		}
-	};
+	// 상태가 변경될 때마다 로컬 스토리지에 저장합니다.
 	useEffect(() => {
-		console.log(card.map((item) => item.isScrap));
-		setOnScrap(card && card.map((item) => item.isScrap));
-	}, [card]);
+		localStorage.setItem("onScrap", JSON.stringify(onScrap));
+	}, [onScrap]);
 
 	return (
 		<>
@@ -69,7 +60,9 @@ const CardSmall = ({ card = [], title, subtitle, more, src }) => {
 								</CardProfileWrap>
 								<ScrapButtonWrap>
 									<ScrapButtonContainer>
-										<span class='css-5dnyrm' onClick={() => bookMarkControlHandler(index)}>
+										<span
+											className='css-5dnyrm'
+											onClick={(event) => bookMarkControlHandler(event, index)}>
 											{onScrap[index] ? <BookMark /> : <BookMarkOn />}
 										</span>
 									</ScrapButtonContainer>
@@ -189,5 +182,3 @@ const ScrapButtonWrap = styled.div`
 `;
 
 const ScrapButtonContainer = styled.div``;
-
-const ScrapButtonItem = styled.div``;
