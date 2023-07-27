@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import Card from "react-bootstrap/Card";
 import { useMutation } from "@tanstack/react-query";
-import { instance } from "../api/oha";
 import { useNavigate } from "react-router-dom";
+
+import { logIn, instance  } from "../api/oha";
 
 
 const LogIn = () => {
@@ -11,40 +12,52 @@ const LogIn = () => {
 	const navigate = useNavigate();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	
 
 		
-	const initTextFiled = () => {
-		setEmail("");
-		setPassword("");
-	};
-			
-	const mutation = useMutation(async (payload) => {
-		const response = await instance.post(`/api/auth/login`, payload);
-		document.cookie = `accessToken=${response.headers.auth}; path=/;`;
-		return response.data;
-	});
+	// const initTextFiled = () => {
+	// 	setEmail("");
+	// 	setPassword("");
+	// };
+
+	const mutation = useMutation(logIn, {});
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		try {
-			const payload = {
-				email: email,
-				password: password,
-			};
-
-			const res = await mutation.mutateAsync(payload);
-			console.log(res);
-			if (res.state >= 300) {
-				alert(res.message);
-				return;
-			}
-			moveHome();
-			initTextFiled();
-			console.log(res);
-		} catch (error) {
-			console.log(error);
-		}
+		const logInfo = {
+			email: email,
+			password: password,
+		};
+		mutation.mutate(logInfo);
 	};
+			
+	// const mutation = useMutation(async (payload) => {
+	// 	const response = await instance.post(`/api/auth/login`, payload);
+	// 	document.cookie = `accessToken=${response.headers.auth}; path=/;`;
+	// 	return response.data;
+	// });
+
+	// const handleSubmit = async (event) => {
+	// 	event.preventDefault();
+	// 	try {
+	// 		const payload = {
+	// 			email: email,
+	// 			password: password,
+	// 		};
+
+	// 		const res = await mutation.mutateAsync(payload);
+	// 		console.log(res);
+	// 		if (res.state >= 300) {
+	// 			alert(res.message);
+	// 			return;
+	// 		}
+	// 		moveHome();
+	// 		initTextFiled();
+	// 		console.log(res);
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// };
 
 	const inputEmailHandler = (event) => {
 		setEmail(event.target.value);
