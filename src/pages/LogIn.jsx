@@ -34,28 +34,6 @@ const LogIn = () => {
 		mutation.mutate(logInfo);
 	};
 
-	// const handleSubmit = async (event) => {
-	// 	event.preventDefault();
-	// 	try {
-	// 		const payload = {
-	// 			email: email,
-	// 			password: password,
-	// 		};
-
-	// 		const res = await mutation.mutateAsync(payload);
-	// 		console.log(res);
-	// 		if (res.state >= 300) {
-	// 			alert(res.message);
-	// 			return;
-	// 		}
-	// 		moveHome();
-	// 		initTextFiled();
-	// 		console.log(res);
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
-
 	const inputEmailHandler = (event) => {
 		setEmail(event.target.value);
 	};

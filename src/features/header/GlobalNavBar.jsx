@@ -23,7 +23,7 @@ const GlobalNavBar = () => {
 		} else {
 			setIsLoggedIn(false);
 		}
-	}, []);
+	}, [isLoggedIn]);
 	console.log(isLoggedIn);
 	const moveHome = () => {
 		navigate("/");
@@ -38,9 +38,12 @@ const GlobalNavBar = () => {
 		navigate("/login");
 	};
 
-	const handleLogout = () => {
-		logOut();
+	const handleLogout = async () => {
+		await logOut();
 		setIsLoggedIn(false);
+		localStorage.removeItem("authorization");
+		localStorage.removeItem("onScrap");
+		window.location.reload();
 	};
 
 	return (
