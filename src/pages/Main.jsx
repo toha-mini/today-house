@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../components/Layout";
 import MainBanner from "../features/HomePage/MainBanner";
 import HomeMenuBar from "../features/HomePage/HomeMenuBar";
