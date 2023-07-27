@@ -17,6 +17,11 @@ const LogIn = () => {
 		onSuccess: (data) => {
 			dispatch(logIn(data));
 			console.log("login", data);
+			navigate("/");
+		},
+		onError: (error) => {
+			console.log("home: ", error);
+			alert("사용자 정보가 틀립니다.");
 		},
 	});
 
