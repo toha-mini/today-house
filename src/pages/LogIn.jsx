@@ -1,82 +1,63 @@
 import React, { useState } from "react";
 import { styled } from "styled-components";
 import Card from "react-bootstrap/Card";
-import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
-import { instance } from "../api/oha";
 import { useNavigate } from "react-router-dom";
 
+import { logIn, instance  } from "../api/oha";
+
+
 const LogIn = () => {
-	// const instanceAxios = axios.create({
-	//   baseURL : process.env.REACT_APP_SERVER_URL
-	//   // baseURL : "http://13.209.96.200:8080"
-	// })
+
 	const navigate = useNavigate();
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	
 
-	const initTextFiled = () => {
-		setEmail("");
-		setPassword("");
-	};
+		
+	// const initTextFiled = () => {
+	// 	setEmail("");
+	// 	setPassword("");
+	// };
 
-	// const LoginState = async (event) => {
-	//   event.preventDefault();
-	//   console.log(process.env.REACT_APP_SERVER_URL)
-	//   try {
-	//     const payload = {
-	//       email:email,
-	//       password:password
-	//     }
-	//     console.log(payload);
-	//     let res = await instanceAxios.post(`/api/auth/login`, payload)
-	//     console.log(res);
-	//     if(res.data.status >= 300){
-	//       alert(res.data.message)
-	//       return;
-	//     }
-
-	//     initTextFiled();
-	//     console.log(res)
-	//     document.cookie = `accessToken=${res.headers.auth}; path=/;`
-	//     }
-
-	//     catch (error) {
-	//       console.log(error)
-	//     }
-	// }
-
-	// ------------------------- 리액트 쿼리로 리팩토링-------------------------------
-
-	const mutation = useMutation(async (payload) => {
-		const response = await instance.post(`/api/auth/login`, payload);
-		document.cookie = `accessToken=${response.headers.auth}; path=/;`;
-		return response.data;
-	});
+	const mutation = useMutation(logIn, {});
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		try {
-			const payload = {
-				email: email,
-				password: password,
-			};
-
-			const res = await mutation.mutateAsync(payload);
-			console.log(res);
-			if (res.state >= 300) {
-				alert(res.message);
-				return;
-			}
-
-			initTextFiled();
-			console.log(res);
-		} catch (error) {
-			console.log(error);
-		}
+		const logInfo = {
+			email: email,
+			password: password,
+		};
+		mutation.mutate(logInfo);
 	};
+			
+	// const mutation = useMutation(async (payload) => {
+	// 	const response = await instance.post(`/api/auth/login`, payload);
+	// 	document.cookie = `accessToken=${response.headers.auth}; path=/;`;
+	// 	return response.data;
+	// });
 
-	// ------------------------- 리액트 쿼리로 리팩토링-------------------------------
+	// const handleSubmit = async (event) => {
+	// 	event.preventDefault();
+	// 	try {
+	// 		const payload = {
+	// 			email: email,
+	// 			password: password,
+	// 		};
+
+	// 		const res = await mutation.mutateAsync(payload);
+	// 		console.log(res);
+	// 		if (res.state >= 300) {
+	// 			alert(res.message);
+	// 			return;
+	// 		}
+	// 		moveHome();
+	// 		initTextFiled();
+	// 		console.log(res);
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// };
 
 	const inputEmailHandler = (event) => {
 		setEmail(event.target.value);
