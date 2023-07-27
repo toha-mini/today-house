@@ -257,7 +257,7 @@ const Account = () => {
             onChange={inputNicknameHandler}
             fullWidth
           />
-          <EmailCheckContents>사용 중인 별명입니다.</EmailCheckContents>
+
           <AgreementCheckBox
             checkAge={checkAge}
             setCheckAge={setCheckAge}

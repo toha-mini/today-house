@@ -157,7 +157,13 @@ const HomePicturePost = () => {
     <PageContainer>
       <NavbarContainer>
         <HeaderContainer>
-          <Logo src={postlogo} alt="postlogo" />
+          <Logo
+            src={postlogo}
+            alt="postlogo"
+            onClick={() => {
+              navigate("/");
+            }}
+          />
           <UploadButton onClick={handleSubmit}>올리기</UploadButton>
         </HeaderContainer>
       </NavbarContainer>
