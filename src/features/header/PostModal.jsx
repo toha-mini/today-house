@@ -111,8 +111,8 @@ const GlobalNavButtonArrow = styled.div`
 const OpenPostModal = styled.div`
 	z-index: 1100;
 	position: absolute;
-	top: 50px;
-	left: 65px;
+	top: 70px;
+	right: 190px;
 	padding: 8px;
 	background-color: rgb(255, 255, 255);
 	border: 1px solid rgb(218, 221, 224);

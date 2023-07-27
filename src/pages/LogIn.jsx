@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import Card from "react-bootstrap/Card";
 import { useMutation } from "@tanstack/react-query";
+import { instance, logIn } from "../api/oha";
 import { useNavigate } from "react-router-dom";
-
 import { logIn, instance  } from "../api/oha";
 
 
@@ -14,13 +14,10 @@ const LogIn = () => {
 	const [password, setPassword] = useState("");
 	
 
-		
-	// const initTextFiled = () => {
-	// 	setEmail("");
-	// 	setPassword("");
-	// };
 
-	const mutation = useMutation(logIn, {});
+
+	const mutation = useMutation(logIn);
+
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();

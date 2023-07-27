@@ -17,10 +17,8 @@ function getCookie(cookieName) {
 	return cookieValue;
 }
 
-
 //! Get Post
 const getPhotoLists = async () => {
-	console.log(process.env.REACT_APP_SERVER_URL);
 	try {
 		const authorizationCookie = getCookie("accessToken");
 		console.log("authorization token: ", authorizationCookie);
@@ -30,7 +28,6 @@ const getPhotoLists = async () => {
 				"Content-Type": "application/json",
 				Accept: "*/*",
 				Authorization: authorizationCookie,
-				// Authorization: `${accessToken}`,
 			},
 		}
 		);
@@ -47,7 +44,6 @@ const postBookMarkLists = async ({ id }) => {
 	try {
 		console.log("bookmarkId: ", id);
 		const authorizationCookie = getCookie("accessToken");
-		console.log("authorization token: ", authorizationCookie);
 		const payload = {
 			postId: id,
 		};
@@ -68,12 +64,12 @@ const postBookMarkLists = async ({ id }) => {
 
 //! login
 const logIn = async (payload) => {
-	console.log("payload:",payload);
+	console.log(payload);
 	try {
 		const response = await instance.post(`/api/auth/login`, payload, {});
+		console.log(payload);
 		document.cookie = `accessToken=${response.headers.auth}; path=/;`;
 		console.log(response);
-		
 	} catch (error) {
 		console.error(error);
 	}
